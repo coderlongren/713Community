@@ -11,3 +11,7 @@
       * 个人中心子系统：http://personnal.community.com 。
       * 资源共享子系统：http://resource.community.com 。
       * 论坛子系统：http://forum.community.com 。
++ **开发周期**：
++ **笔者担任的角色**：
++ **开发工具**：
++ **使用技术**：
