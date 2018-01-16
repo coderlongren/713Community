@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.ResourceHistoryCommentDao">
+
+    <!--sql片段-->
+    <sql id="tableName">resource_comment_history</sql>
+
+    <resultMap id="resourceHistoryCommentResultMap" type="ResourceHistoryComment">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="floor" property="floor"/>
+        <result column="username" property="username"/>
+        <result column="img" property="img"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="comment" property="comment"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="listAll" resultMap="resourceHistoryCommentResultMap">
+        SELECT * FROM <include refid="tableName" />
+    </select>
+
+    <select id="getById" resultMap="resourceHistoryCommentResultMap">
+        SELECT * FROM <include refid="tableName" />
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="ResourceHistoryComment">
+        INSERT INTO <include refid="tableName"/>
+        (parent_id,floor,username,img,release_time,comment,create_time,update_time)
+        VALUES (#{parentId},#{floor},#{username},#{img},#{releaseTime},#{comment},#{createTime},#{updateTime})
+
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM <include refid="tableName"/>
+        WHERE id = #{dynamicCommentId}
+    </delete>
+
+    <select id="listAllWithSearch" parameterType="java.lang.String" resultMap="resourceHistoryCommentResultMap">
+        SELECT * FROM <include refid="tableName"/>
+        WHERE username LIKE #{val} OR comment LIKE #{val}
+    </select>
+
+</mapper>

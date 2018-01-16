@@ -1,0 +1,259 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://static.community.com/lib/html5.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/respond.min.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css"
+          id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/layui-v2.1.5/layui/css/layui.css"/>
+    <!--[if IE 6]-->
+    <script type="text/javascript" src="http://static.community.com/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <title>下载记录</title>
+</head>
+<body>
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员管理 <span class="c-gray en">&gt;</span> 下载记录 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<div class="page-container">
+    <div class="text-c">
+        <form class="Huiform " target="_self">
+            <div class="col-xs-11" >
+                <div class="col-xs-2" style="display: inline-block"></div>
+                <div class="formControls col-xs-2" style="display: inline-block">
+                    <span class="select-box">
+                        <select class="select" size="1" id="search-param">
+                            <option value="downloader" selected>资源下载者</option>
+                            <option value="sharer">资源上传者</option>
+                            <option value="resource_type">资源类别名</option>
+                        </select>
+				    </span>
+                </div>
+                <div class="col-xs-5" style="display: inline-block">
+                    <input type="text" class="input-text"  placeholder="模糊搜索..." id="serach-input">
+                </div>
+                <div class="col-xs-2" style="display: inline-block">
+
+                    <button style="display: inline-block" type="button" class="btn btn-success" id="searchBtn"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div style="margin-top: 50px;"></div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+		<a class="btn btn-primary radius" onclick="memberdownload_add('添加下载记录','member-download-add.html')" href="javascript:;"><i
+                class="Hui-iconfont">&#xe600;</i> 添加下载记录</a></span> <span class="r">共有数据：<strong id ="total-text"></strong> 条</span></div>
+
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="40">ID</th>
+                <th width="60">资源下载者</th>
+                <th width="50">下载者IP</th>
+                <th width="60">资源上传者</th>
+                <th width="100">URL</th>
+                <th width="80">资源类别名</th>
+                <th width="120">资源标题</th>
+                <th width="100">创建时间</th>
+                <th width="100">更新时间</th>
+                <th width="40">操作</th>
+            </tr>
+            </thead>
+            <tbody id="tb-body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<input id = "member-download-edit-id" style = "display:none" value = "" type="text/">
+<button id = "btn-refresh" style = "display:none">刷新</button>
+<div id = "page-nav" style = "float:right"></div>
+
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layui-v2.1.5/layui/layui.js"></script>
+<script type="text/javascript" src="http://static.community.com/system/common.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        //加载会员下载信息
+        loadMemberDownloadInfo("/memberDownload/info/page/", null, null);
+
+        //获取元素节点
+        $("#searchBtn").click(function() {
+            var searchParam = $("#search-param").val();
+            var searchVal = $("#serach-input").val();
+            loadMemberDownloadInfo("/memberDownload/param/page/", searchParam, searchVal);
+        });
+
+        //刷新元素数据
+        $("#btn-refresh").click(function () {
+            window.location.reload();
+        });
+    });
+
+    /*加载列表数据*/
+    function loadMemberDownloadInfo(url, param, paramVal) {
+        $.getJSON(url + '1', {
+                rows: 10,//每页显示的数据条数
+                searchParam : param,
+                searchVal : paramVal
+            },
+            function (res) { //从第1页开始请求。返回的json格式可以任意定义
+                laypage({
+                    cont: 'page-nav', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+                    pages: res.pageCount, //通过后台拿到的总页数
+                    curr: 1, //初始化当前页
+                    skin: '#5a98de',//皮肤颜色
+                    groups: 5, //连续显示分页数
+                    skip: true, //是否开启跳页
+                    count: res.total, //数据总数
+                    limit: 10, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                    limits: [10, 20, 30, 40, 50], //每页条数的选择项。如果 layout 参数开启了 limit，则会出现每页条数的select选择框
+                    first: '首页', //若不显示，设置false即可
+                    last: '尾页', //若不显示，设置false即可
+                    prev: '上一页', //若不显示，设置false即可
+                    next: '下一页', //若不显示，设置false即可
+                    jump: function (e) { //触发分页后的回调
+                        $.getJSON(url + e.curr, {
+                            rows: 10, //每页显示的数据条数
+                            searchParam : param,
+                            searchVal : paramVal
+                        }, function (res) {
+                            var data = res.rows;
+                            $("#total-text").html(res.total);
+                            /*解析表格分页数据*/
+                            analysisMemberDownloadInfo(data);
+                        });
+                    }
+                });
+            });
+    }
+
+    /*解析表格分页数据*/
+    function analysisMemberDownloadInfo(data) {
+        //每次执行解析前都先清空之前的数据
+        $("#tb-body").empty();
+
+        //console.log(data);
+        for(var i = 0 ; i < data.length ; i++) {
+            $("<tr></tr>").addClass("text-c")
+                .append($("<td></td>")
+                    .append($("<input type = 'checkbox'/>")
+                        .attr("value", data[i].id)))
+                .append($("<td></td>")
+                    .append(data[i].id))
+                .append($("<td></td>")
+                    .append(data[i].downloader))
+                .append($("<td></td>")
+                    .append(data[i].ip))
+                .append($("<td></td>")
+                    .append(data[i].sharer))
+                .append($("<td></td>")
+                    .append(data[i].url))
+                .append($("<td></td>")
+                    .append(data[i].resourceType))
+                .append($("<td></td>")
+                    .append(data[i].resourceTitle))
+                .append($("<td></td>")
+                    .append(new Date(data[i].createTime).Format("yyyy-MM-dd hh:mm:ss")))
+                .append($("<td></td>")
+                    .append(new Date(data[i].updateTime).Format("yyyy-MM-dd hh:mm:ss")))
+                .append($("<td class='td-manage'></td>")
+                    .append($("<a style='text-decoration: none' href='javascript:;' title='编辑'></a>")
+                        .attr("onclick", "memberdownload_edit('编辑','member-download-edit.html'," + data[i].id + ")")
+                        .append($("<i class='Hui-iconfont'></i>")
+                            .append("&#xe6df;")))
+                    .append($("<a style='text-decoration: none' href='javascript:;' title='删除' class='ml-5'></a>")
+                        .attr("onclick", "memberdownload_del(this," + data[i].id + ")")
+                        .append($("<i class='Hui-iconfont'></i>")
+                            .append("&#xe6e2;"))))
+                .appendTo($("#tb-body"));
+        }
+    }
+
+    /*会员下载信息--新增*/
+    function memberdownload_add(title, url) {
+        var index = layer.open({
+            type : 2,
+            maxmin : true,
+            area : ['700px' , '400px'],
+            title : title,
+            shift : 0,
+            content : url
+        });
+    }
+
+    /*会员下载信息--删除*/
+    function memberdownload_del(obj, id) {
+        layer.confirm('确定要删除吗？', function (index) {
+            deleteMemberDownload(obj, id);
+        });
+    }
+
+    /*会员下载信息--更新*/
+    function memberdownload_edit(title, url, id) {
+
+        $("#member-download-edit-id").val(id);
+
+        layer.open({
+            type : 2,
+            maxmin : true,
+            area: ['700px' , '400px'],
+            title: title,
+            shift: 0,
+            content: url
+        });
+    }
+
+    /*根据id删除会员下载信息*/
+    function deleteMemberDownload(obj, id) {
+        $.ajax({
+            type : "delete",
+            url : "/memberDownload/info/" + id,
+            dataType : "json",
+            statusCode : {
+                200 : function() {
+                    layer.msg('删除成功', {time: 2000, icon: 6});
+                    $(obj).parents("tr").remove();
+                },
+                404 : function () {
+                    layer.msg('资源不存在！',{time: 2000, icon: 0});
+                },
+                500 : function () {
+                    layer.msg('操作失败！服务器出错！',{time: 2000, icon: 2});
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

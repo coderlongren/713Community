@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.community.resource.dao.ResourceInformationDao">
+
+    <!--资源详情mapper文件  对应resource_info-->
+
+
+    <sql id="tableName">resource_info</sql>
+
+    <resultMap id="resourceInfoResultMap" type="ResourceInfo">
+        <id column="id" property="id"/>
+        <result column="resource_id" property="resourceId"/>
+        <result column="content" property="content"/>
+        <result column="url" property="url"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insertResourceInfo" parameterType="ResourceInfo">
+        insert into <include refid="tableName"/> (resource_id,content,url,create_time,update_time)
+        values(#{resourceId},#{content},#{url},#{createTime},#{updateTime})
+    </insert>
+
+
+</mapper>

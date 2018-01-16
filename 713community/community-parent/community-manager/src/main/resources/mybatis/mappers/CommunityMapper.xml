@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.CommunityDao">
+
+	<sql id="tableName">community</sql>
+
+	<resultMap id="communityResultMap" type="Community">
+		<id column="id" property="id"/>
+		<result column="introduction" property="introduction"/>
+		<result column="img" property="img"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+
+	</resultMap>
+
+	<select id="getById" parameterType="long" resultMap="communityResultMap">
+		select * from <include refid="tableName"/>
+		where id=#{id}
+
+	</select>
+
+	<select id="listAll" resultMap="communityResultMap">
+		select * from <include refid="tableName"/>
+
+	</select>
+
+	<select id="listAllByName" parameterType="java.lang.String" resultMap="communityResultMap">
+		select * from <include refid="tableName"/>
+		where introduction like #{keyWord} or img like #{keyWord} or email like #{keyWord} or address like #{keyWord} or phone like #{keyWord}
+	</select>
+
+
+	<insert id="insert" parameterType="Community">
+		insert into <include refid="tableName"/>(introduction, img, email, phone, address, create_time, update_time)
+		VALUES (#{introduction}, #{img}, #{email}, #{phone},#{address}, #{createTime}, #{updateTime})
+
+	</insert>
+
+	<update id="update" parameterType="Community">
+		update <include refid="tableName"/>
+		<set>
+			<if test="introduction != null and introduction != ''">
+				introduction = #{introduction},
+			</if>
+			<if test="img != null and img != ''">
+				img = #{img},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="address != null and address != ''">
+				address = #{address},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="long">
+		delete from <include refid="tableName"/> where id = #{id}
+	</delete>
+</mapper>

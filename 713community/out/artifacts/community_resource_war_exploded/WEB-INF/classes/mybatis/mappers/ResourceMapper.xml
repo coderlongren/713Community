@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.resource.dao.ResourceInfoDao">
+    <!--sql片段-->
+    <sql id="tableName">resource</sql>
+
+    <!--资源mapper文件  对应resource-->
+
+    <resultMap id="resourceResultMap" type="Resource">
+        <id column="id" property="id"/>
+        <result column="user_username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="content" property="content"/>
+        <result column="url" property="url"/>
+        <result column="user_id" property="userId"/>
+        <result column="type_id" property="typeId"/>
+        <result column="author" property="author"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="browse_num" property="browseNum"/>
+        <result column="down_num" property="downNum"/>
+        <result column="title" property="title"/>
+        <result column="show_flag" property="showFlag"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+
+        <!--配置一对一的关系-->
+        <!--注意：property是定义User时的属性名-->
+        <association property="user" javaType="com.community.resource.entity.User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="realname" property="realname"/>
+            <result column="password" property="password"/>
+            <result column="gender" property="gender"/>
+            <result column="phone" property="phone"/>
+            <result column="email" property="email"/>
+            <result column="photo" property="photo"/>
+            <result column="class" property="userClass"/>
+            <result column="user_type_id" property="userTypeId"/>
+            <result column="birthday" property="birthDay"/>
+            <result column="rank_id" property="rankId"/>
+            <result column="credits" property="credits"/>
+            <result column="status" property="status"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="type_name" property="typeName"/>
+            <result column="rank_name" property="rankName"/>
+        </association>
+
+    </resultMap>
+    <!--关联查询出楼主的信息和资源的详情-->
+    <select id="getResourceInfoById" resultMap="resourceResultMap" parameterType="java.lang.Long">
+        select resource.*,resource_type.`name` name, resource_info.content content,resource_info.url url,`user`.username username,`user`.photo photo,`user`.credits credits from resource,`user`,resource_info,resource_type
+	WHERE resource.user_id = `user`.id and resource.id = resource_info.resource_id and resource.type_id = resource_type.id and resource.id = #{resourceId}
+    </select>
+
+    <!--根据用户id查询该用户发布的资源总数-->
+    <select id="getResourceReleaseCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*) from resource,`user` where resource.user_id = `user`.id and `user`.id = #{userId}
+    </select>
+
+    <!--根据资源id得到资源的浏览量-->
+    <select id="getResourceBrowseNumById" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select resource.browse_num from resource where resource.id = #{resourceId}
+    </select>
+
+
+    <!--更新资源浏览量-->
+    <update id="updateBrowseNumByClickResourceLink" >
+        update resource SET resource.browse_num = #{browseNum} where id = #{resourceId}
+    </update>
+
+</mapper>

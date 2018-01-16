@@ -1,0 +1,279 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://static.community.com/lib/html5.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/respond.min.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css"
+          id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/layui-v2.1.5/layui/css/layui.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>首页导航列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 首页栏目导航
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c"> 日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin"
+               class="input-text Wdate" style="width:120px;">
+
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d'})" id="logmax"
+               class="input-text Wdate" style="width:120px;">
+        <input type="text" name="homepageinfo" id="search-homepage" placeholder="模糊搜索首页栏目名..." style="width:250px" class="input-text">
+        <button name="" id="search-btn" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜首页栏目名</button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()"
+                                                                class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+		<a class="btn btn-primary radius" onclick="homepage_add('添加首页栏目名','homepage-add.html')" href="javascript:;"><i
+                class="Hui-iconfont">&#xe600;</i> 添加首页栏目名</a></span> <span class="r">共有数据：<strong id ="total-text"></strong> 条</span></div>
+
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="40"><input name="" type="checkbox" value=""></th>
+                <th width="50">ID</th>
+                <th width="80">首页栏目名</th>
+                <th width="40">顺序排列号</th>
+                <th width="120">关联的链接地址</th>
+                <th width="80">创建时间</th>
+                <th width="80">更新时间</th>
+                <th width="80">操作</th>
+            </tr>
+            </thead>
+            <tbody id = "tb-body">
+            <!--<tr class="text-c">
+                <td><input name="" type="checkbox" value=""></td>
+                <td>001</td>
+                <td>java后端</td>
+                <td>2014-6-11 11:11:42</td>
+                <td>2014-6-11 11:11:42</td>
+                <td class="td-manage">
+                    <a style="text-decoration:none" class="ml-5"
+                       onClick="picture_edit('招新类型编辑','picture-add.html','10001')" href="javascript:;" title="编辑"><i
+                            class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5"
+                                                                     onClick="picture_del(this,'10001')"
+                                                                     href="javascript:;" title="删除"><i
+                        class="Hui-iconfont">&#xe6e2;</i></a></td>
+            </tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<input id = "homepage-edit-id" style = "display:none" value = "" type="text/">
+<button id = "btn-refresh" style = "display:none">刷新</button>
+<div id = "page-nav" style = "float:right"></div>
+
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layui-v2.1.5/layui/layui.js"></script>
+<script type="text/javascript" src="http://static.community.com/system/common.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        //加载列表数据
+        loadHomePageData("/homepage/info/page/");
+
+        //获取元素节点
+        $("#search-btn").click(function () {
+            searchHomePage();
+        });
+
+        //刷新元素数据
+        $("#btn-refresh").click(function () {
+            window.location.reload();
+        });
+    });
+
+    function searchHomePage() {
+        var searchVal = $("#search-homepage").val();
+        var url = "/homepage/" + searchVal + "/page/";
+        loadHomePageData(url);
+    }
+
+    /*加载列表数据*/
+    function loadHomePageData(url) {
+        $.getJSON(url + '1', {
+            rows : 10 //每页显示的数据条数
+        },
+         function (res) {
+            laypage({
+                cont: 'page-nav', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+                pages: res.pageCount, //通过后台拿到的总页数
+                curr: 1, //初始化当前页
+                skin: '#5a98de',//皮肤颜色
+                groups: 5, //连续显示分页数
+                skip: true, //是否开启跳页
+                count: res.total, //数据总数
+                limit: 10, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                limits: [10, 20, 30, 40, 50], //每页条数的选择项。如果 layout 参数开启了 limit，则会出现每页条数的select选择框
+                first: '首页', //若不显示，设置false即可
+                last: '尾页', //若不显示，设置false即可
+                prev: '上一页', //若不显示，设置false即可
+                next: '下一页', //若不显示，设置false即可
+                jump: function (e) { //触发分页后的回调
+                    $.getJSON(url + e.curr, {
+                        rows: 10 //每页显示的数据条数
+                    }, function (res) {
+
+                        var data = res.rows;
+                        $("#total-text").html(res.total);
+                        console.log(res);
+                        /*解析表格分页数据*/
+                        analysisHomePageData(data);
+                    });
+                }
+            });
+         });
+    }
+
+    /*解析表格分页数据*/
+    function analysisHomePageData(data) {
+        //每次执行解析前都先清空之前的数据
+        $("#tb-body").empty();
+
+        //console.log(data);
+        for (var i = 0 ; i < data.length ; i++) {
+            $("<tr></tr>").addClass("text-c")
+                .append($("<td></td>")
+                    .append($("<input type = 'checkbox'/>")
+                        .attr("value", data[i].id)))
+                .append($("<td></td>")
+                    .append(data[i].id))
+                .append($("<td></td>")
+                    .append(data[i].columnName))
+                .append($("<td></td>")
+                    .append(data[i].orderNum))
+                .append($("<td></td>")
+                    .append(data[i].url))
+                .append($("<td></td>")
+                    .append(new Date(data[i].createTime).Format("yyyy-MM-dd hh:mm:ss")))
+                .append($("<td></td>")
+                    .append(new Date(data[i].updateTime).Format("yyyy-MM-dd hh:mm:ss")))
+                .append($("<td class='td-manage'></td>")
+                    .append($("<a style='text-decoration: none' href='javascript:;' title='编辑'></a>")
+                        .attr("onclick", "homepage_edit('编辑','homepage-edit.html'," + data[i].id + ")")
+                        .append($("<i class='Hui-iconfont'></i>")
+                            .append("&#xe6df;")))
+                    .append($("<a style='text-decoration: none' href='javascript:;' title='删除' class='ml-5'></a>")
+                        .attr("onclick", "homepage_del(this," + data[i].id + ")")
+                        .append($("<i class='Hui-iconfont'></i>")
+                            .append("&#xe6e2;"))))
+                .appendTo($("#tb-body"));
+        }
+    }
+
+    /*首页栏目导航信息-编辑*/
+    function homepage_edit(title, url, id) {
+        //父页面将id值传入元素标签的id为homepage-edit-id的隐藏的input框
+        $("#homepage-edit-id").val(id);
+        //打开子页面
+        layer.open({
+            type : 2,
+            maxmin : true,
+            area: ['500px', '300px'],
+            title: title,
+            shift: 0,
+            content: url
+        });
+    }
+
+    /*首页栏目导航信息-添加*/
+    function homepage_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            maxmin: true,
+            area: ['500px', '300px'],
+            title: title,
+            shift: 0,
+            content: url
+        });
+        //layer.full(index);//全屏显示
+    }
+    /*首页栏目导航信息-查看*/
+    function homepage_show(title, url, id) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        //layer.full(index);
+    }
+
+    /*首页栏目导航信息-下架*/
+    function homepage_stop(obj, id) {
+        layer.confirm('确认要下架吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
+            $(obj).remove();
+            layer.msg('已下架!', {icon: 5, time: 1000});
+        });
+    }
+
+    /*首页栏目导航信息-发布*/
+    function homepage_start(obj, id) {
+        layer.confirm('确认要发布吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
+            $(obj).remove();
+            layer.msg('已发布!', {icon: 6, time: 1000});
+        });
+    }
+
+    /*首页栏目导航信息-删除*/
+    function homepage_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            deleteHomePage(obj, id);
+        });
+    }
+
+    /*根据id删除首页栏目导航信息*/
+    function deleteHomePage(obj, id) {
+        $.ajax({
+            type : "delete",
+            url : "/homepage/info/" + id,
+            dataType : "json",
+            statusCode : {
+                200 : function () {
+                    layer.msg('删除成功', {time: 2000, icon: 6});
+                    $(obj).parents("tr").remove();
+                },
+                404 : function () {
+                    layer.msg('资源不存在！',{time: 2000, icon: 0});
+                },
+                500 : function () {
+                    layer.msg('操作失败！服务器出错！',{time: 2000, icon: 2});
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

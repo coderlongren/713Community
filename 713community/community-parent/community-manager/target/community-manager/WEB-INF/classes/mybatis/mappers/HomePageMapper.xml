@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.HomePageDao">
+
+    <sql id="tableName">navigation</sql>
+
+    <!--表字段与实体属性之间的映射规则-->
+    <resultMap id="homePageResultMap" type="HomePage">
+        <id column="id" property="id"/>
+        <result column="name" property="columnName"/>
+        <result column="url" property="url"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getById" resultMap="homePageResultMap">
+        select * from <include refid="tableName"/>
+        where id = #{id}
+    </select>
+
+    <select id="listAll" resultMap="homePageResultMap">
+        select * from <include refid="tableName"/>
+    </select>
+
+    <select id="listHomePageWithSearch" resultMap="homePageResultMap">
+        SELECT * FROM <include refid="tableName"/>
+        WHERE name LIKE #{searchVal}
+    </select>
+
+    <insert id="insert" parameterType="HomePage">
+        insert into <include refid="tableName"/>
+        (name, url, order_num, create_time, update_time)
+        values(#{columnName}, #{url}, #{orderNum}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="HomePage">
+        update<include refid="tableName"/>
+        <set>
+            <if test="columnName != null and columnName != ''">
+                name = #{columnName},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="orderNum != null and orderNum != ''">
+                order_num = #{orderNum},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from<include refid="tableName"/>
+        where id = #{id}
+    </delete>
+
+
+
+</mapper>

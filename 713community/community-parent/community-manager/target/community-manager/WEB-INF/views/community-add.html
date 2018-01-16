@@ -1,0 +1,189 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://lib.h-ui.net/html5.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/respond.min.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>添加公告</title>
+    <meta name="keywords" content="">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-notice-add">
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>社区简介：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="introduction" name="introduction">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图像：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="img" name="img">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电话：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="如：123.@sina.com" id="email" name="email">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="address" name="address">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span> </label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input class="btn btn-primary radius" id="submit-btn" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-notice-add").validate({
+           rules: {
+                introduction: {
+                    required: true,
+                },
+                img: {
+                    required: true,
+                },
+                phone: {
+                    required: true,
+                    minlength: 11,
+                    maxlength: 11
+                },
+                emile: {
+                    required: true,
+                },
+               address: {
+                   required: true,
+               }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+            }
+        });
+
+
+        $("#submit-btn").click(function () {
+            //添加社区信息
+            addCommunity();
+        });
+
+    });
+
+
+    /*添加社区信息*/
+    function addCommunity() {
+        layer.msg('确定提交？', {
+            time : 0,
+            btn : ['确定', '取消'],
+            yes : function (index) {
+                layer.close(index);
+                $.ajax({
+                    type : "post",
+                    url : "/community",
+                    data : { // 要传给后台的参数数据，其中冒号左边是后台要接收的参数名，冒号右边的是参数对应的值
+                        introduction : $("#introduction").val(),
+                        img : $("#img").val(),
+                        phone : $("#phone").val(),
+                        email : $("#email").val(),
+                        address : $("#address").val()
+                    },
+                    dataType : "json",
+                    statusCode : {
+                        201 : function () {
+                            layer.msg('添加成功', {
+                                time : 0,
+                                icon: 6,
+                                btn: ['确定'],
+                                yes : function() {
+                                    var current_window = parent.layer.getFrameIndex(window.name);
+                                    parent.$('#btn-refresh').click();
+                                    parent.layer.close(current_window);
+                                }
+                            });
+                        },
+                        500 : function () {
+                            layer.msg('操作失败！服务器出错', {time : 2000, icon : 2});
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

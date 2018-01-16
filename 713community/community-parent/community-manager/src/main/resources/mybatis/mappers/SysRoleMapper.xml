@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.SysRoleDao">
+
+	<sql id="tableName">sys_role</sql>
+
+	<resultMap id="roleResultMap" type="SysRole">
+		<id column="role_id" property="roleId"/>
+		<result column="roleName" property="roleName"/>
+		<result column="status" property="status"/>
+		<result column="description" property="description"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<resultMap id="roleWithMenusResultMap" type="SysRole" extends="roleResultMap">
+
+		<collection property="menus" ofType="SysMenu">
+			<id column="id" property="menuId"/>
+			<result column="name" property="menuName"/>
+			<result column="url" property="url"/>
+			<result column="icon" property="icon"/>
+			<result column="perms" property="perms"/>
+			<result column="type" property="type"/>
+			<result column="parent_id" property="parentId"/>
+			<result column="parent_name" property="parentName"/>
+			<result column="order_num" property="orderNum"/>
+			<result column="create_time" property="createTime"/>
+			<result column="update_time" property="updateTime"/>
+		</collection>
+	</resultMap>
+
+	<select id="getRoleWithMenus" parameterType="java.lang.Long" resultMap="roleWithMenusResultMap">
+		select r.*, m.*
+		from sys_menu m, sys_role_menu rm, sys_role r
+		where m.id = rm.menu_id and r.role_id = rm.role_id and r.role_id = #{roleId}
+	</select>
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="roleResultMap">
+		select * from <include refid="tableName"/> where role_id = #{roleId}
+	</select>
+
+	<select id="listAll" resultMap="roleResultMap">
+		select * from <include refid="tableName"/>
+	</select>
+
+	<update id="update" parameterType="SysRole">
+		update <include refid="tableName"/>
+		<set>
+			<if test="roleName != null and roleName != ''">
+				roleName = #{roleName},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status},
+			</if>
+			<if test="description != null and description != ''">
+				description = #{description},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where role_id = #{roleId}
+	</update>
+
+	<insert id="insert" parameterType="SysRole" useGeneratedKeys="true" keyProperty="roleId">
+
+		insert into
+		<include refid="tableName"/>(roleName, status, description, create_time, update_time)
+		values(#{roleName}, #{status}, #{description}, #{createTime}, #{updateTime})
+
+	</insert>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from <include refid="tableName"/> where role_id = #{roleId}
+	</delete>
+
+</mapper>

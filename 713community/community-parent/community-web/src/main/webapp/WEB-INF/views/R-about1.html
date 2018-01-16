@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>关于我们/713</title>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/R-about1.css"/>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+
+</head>
+<body>
+<!--导航栏-->
+<div id="sel">
+</div>
+<div class="img">
+    <img src="http://static.community.com/pages/img/ha.jpg" style="width:1500px;height:500px;" class="img-responsive"/>
+    <div class="box"></div>
+    <div class="boxcontent">713 community</div>
+</div>
+<div class="container">
+
+    <div class="tab row">
+        <div class="tabnav col-md-3" id="tabnav">
+            <h3>713社区</h3>
+            <ul class="list-unstyled">
+                <li class="nav1">1.社区简介</li>
+                <li class="nav2">2.项目展示</li>
+                <li class="nav3">3.联系方式</li>
+            </ul>
+        </div>
+
+        <div class="content col-md-9">
+            <ul class="list-unstyled">
+                <li class="content1">
+                    <h3>社区简介</h3>
+                   <!-- <p id="content1">
+                        713社区自创立以来一直专业致力于智能化弱电工程；始终坚持发扬"诚信、创新、沟通"为企业宗旨，以"技术、服务"为立业之本的团体精神，并形成一套完整的设计、安装、调试、培训、维护一站式服务体系。
+                    </p>-->
+                </li>
+                <li class="content2">
+                    <h3>项目展示</h3>
+                    <div class="row" id="contenttext">
+                    </div>
+                </li>
+                <li class="content3" id="content3">
+                    <h3>联系方式</h3>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="footer">
+    <p>Copyright © 2005-2017 713 Community, All rights reserved. 鄂ICP备11111号-5 | © 2017 713 Community </p>
+</div>
+<script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/bs/js/holder.min.js"></script>
+<script>
+    $(function () {
+        //加载导航栏数据
+        $("#sel").load("http://www.community.com/head.html");
+
+        viewAboutUs("http://www.community.com/rest/about_us");
+
+        $contents = $('.content>ul>li');
+        $('.tabnav>ul>li').click(function () {
+            $contents.css('display', 'none');
+            var index = $(this).index();
+            $contents[index].style.display = "block";
+        })
+    });
+    function viewAboutUs(url) {
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "json",
+            statusCode: {
+                200: function (data) {
+                    var list = "";
+                    $('#tabnav').append("<img src=" + data.community.img + " class='img-responsive' />");
+                    $('#content1').html(data.community.introduction);
+                    $('#content3').append("<p>电话:" + data.community.phone + "</p>")
+                        .append("<p>邮箱:" + data.community.email + "</p>")
+                        .append("<p>地址:" + data.community.address + "</p>")
+                    $.each(data.achievements, function (i, result) {
+                        if (result.achievement.showFlag == 1) {
+                            list += "<div class='col-md-4'>"
+                            list += "<h4 class='page-header'>" + result.achievement.name + "</h4>"
+                            list += "<div class='page-text'>" + result.achievement.bigintroduction + "</div>"
+                            list += "</div>"
+                        }
+                    })
+                    $('#contenttext').append(list)
+                },
+                404: function (data) {
+
+                },
+                500: function (data) {
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

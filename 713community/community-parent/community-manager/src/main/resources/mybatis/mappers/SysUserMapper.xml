@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.SysUserDao">
+
+	<!--sql片段-->
+	<sql id="tableName">sys_user</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<resultMap id="sysUserResultMap" type="SysUser">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="sex" property="sex"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="remark" property="remark"/>
+		<result column="status" property="status"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<resultMap id="sysUserWithRolesResultMap" type="SysUser" extends="sysUserResultMap">
+		<collection property="roles" ofType="SysRole">
+			<id column="role_id" property="roleId"/>
+			<result column="roleName" property="roleName"/>
+			<result column="status" property="status"/>
+			<result column="description" property="description"/>
+			<result column="create_time" property="createTime"/>
+			<result column="update_time" property="updateTime"/>
+		</collection>
+	</resultMap>
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+	<select id="listAll" resultMap="sysUserResultMap">
+		select * from <include refid="tableName"/>
+	</select>
+
+	<select id="getByUserName" parameterType="string" resultType="SysUser">
+		select * from sys_user
+		where username = #{userName}
+	</select>
+
+	<select id="getByIdWithRoles" parameterType="java.lang.Long" resultMap="sysUserWithRolesResultMap">
+		select u.*,r.roleName
+		from sys_user u, sys_role r, sys_user_role ur
+		where u.id = ur.user_id and r.role_id = ur.role_id and u.id = #{userId}
+	</select>
+
+	<select id="listUserByName" parameterType="java.lang.String" resultMap="sysUserResultMap">
+		select * from <include refid="tableName"/>
+		where username like #{userName}
+	</select>
+
+	<!-- 对于插入操作，都要写完出id以外的所有字段，然后字段跟值的顺序一定要保持一致，如username - #{username}等,同时#{}里的值写对应实体类型里面的字段名 -->
+	<insert id="insert" parameterType="SysUser" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		<include refid="tableName"/>(username, password, sex, phone, email, remark, status, create_user_id, create_time, update_time)
+		values(#{username}, #{password}, #{sex}, #{phone}, #{email}, #{remark}, #{status}, #{createUserId}, #{createTime}, #{updateTime})
+	</insert>
+
+	<update id="update" parameterType="SysUser">
+		update <include refid="tableName"/>
+		<set>
+			<if test="username != null and username != ''">
+				username = #{username},
+			</if>
+			<if test="password != null and password != ''">
+				password = #{password},
+			</if>
+			<if test="sex != null and sex != ''">
+				sex = #{sex},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+
+			<if test="remark != null and remark != ''">
+				remark = #{remark},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status},
+			</if>
+			<if test="createUserId != null and createUserId != ''">
+				create_user_id = #{createUserId},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+
+		</set>
+
+		where id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from <include refid="tableName"/> where id = #{id}
+	</delete>
+
+</mapper>

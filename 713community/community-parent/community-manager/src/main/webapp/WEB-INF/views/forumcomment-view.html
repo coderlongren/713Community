@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://lib.h-ui.net/html5.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/respond.min.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css"
+          id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <link href="http://static.community.com/froalaEditor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <!--<link rel="stylesheet" href="http://static.community.com/summernote/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/summernote.css" />-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>公告内容</title>
+    <meta name="keywords" content="">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-recruit-add">
+
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">公告内容：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+
+                <div id="content">
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </form>
+</article>
+
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script src="http://static.community.com/froalaEditor/js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<!--<script src="../js/froala_editor_ie8.min.js"></script>-->
+<![endif]-->
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/tables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/media_manager.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/block_styles.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/langs/zh_cn.js"></script>
+<!--<script type="text/javascript" src="http://static.community.com/summernote/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/summernote/js/summernote.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/summernote/js/summernote-zh-CN.min.js"></script>-->
+
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+
+        //加载数据
+        loadData("/forumcomment/");
+
+    });
+
+    /*加载数据*/
+    function loadData(url) {
+        var dynamiccomment_view_id = parent.$("#dynamiccomment-view-id").val();
+        $.ajax({
+            type: "get",
+            url: url + dynamiccomment_view_id,
+            dataType: "json",
+            statusCode: {
+                200: function (data) {
+                    $("#content").append(data.comment);
+                },
+                404: function () {
+                    layer.msg('资源不存在！', {time: 2000, icon: 0});
+                },
+                500: function () {
+                    layer.msg('操作失败！服务器出错！', {time: 2000, icon: 2});
+                }
+            }
+        });
+    }
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

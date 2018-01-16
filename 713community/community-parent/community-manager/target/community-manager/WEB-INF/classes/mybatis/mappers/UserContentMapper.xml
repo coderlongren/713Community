@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.UserContentDao">
+
+	<!--sql片段-->
+	<sql id="tableName">user_content</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<resultMap id="userContentResultMap" type="UserContent">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="position" property="position"/>
+		<result column="contact" property="contact"/>
+		<result column="about" property="about"/>
+		<result column="skill" property="skill"/>
+		<result column="motto" property="motto"/>
+		<result column="education" property="education"/>
+		<result column="language" property="language"/>
+		<result column="hobby" property="hobby"/>
+		<result column="award" property="award"/>
+		<result column="work_exp" property="workExp"/>
+	</resultMap>
+
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="userContentResultMap">
+		SELECT * FROM <include refid="tableName" /> WHERE user_id=#{userId}
+	</select>
+	
+
+
+</mapper>

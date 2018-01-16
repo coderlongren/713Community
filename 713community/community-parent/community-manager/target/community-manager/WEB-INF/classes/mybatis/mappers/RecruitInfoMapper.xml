@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.RecruitInfoDao">
+
+    <sql id="tableName">recruit_info</sql>
+
+    <!--表字段与实体属性之间的映射规则-->
+    <resultMap id="recruitInfoResultMap" type="recruitInfo">
+        <id column="id" property="id"/>
+        <result column="type_id" property="typeId"/>
+        <result column="duty" property="duty"/>
+        <result column="demand" property="demand"/>
+        <result column="link_man" property="linkMan"/>
+        <result column="link_qq" property="linkQQ"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="type_name" property="typeName"/>
+    </resultMap>
+
+    <select id="getById" resultMap="recruitInfoResultMap">
+        SELECT  ri.* , rt.`name` type_name
+        FROM recruit_info ri, recruit_type rt
+        where ri.id = rt.id and ri.id = #{id}
+    </select>
+
+    <select id="listAll" resultMap="recruitInfoResultMap">
+        SELECT ri.* , rt.name type_name
+        from recruit_info ri, recruit_type rt
+        where ri.type_id = rt.id
+    </select>
+
+
+
+    <insert id="insert" parameterType="RecruitInfo">
+        insert into<include refid="tableName"/>
+        (type_id, duty, demand, link_man, link_qq, create_time, update_time)
+        values(#{typeId}, #{duty}, #{demand}, #{linkMan}, #{linkQQ}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="RecruitInfo">
+        update<include refid="tableName"/>
+        <set>
+            <if test="typeId != null and typeId != ''">
+                type_id = #{typeId},
+            </if>
+            <if test="duty != null and duty != ''">
+                duty = #{duty},
+            </if>
+            <if test="demand != null and demand != ''">
+                demand = #{demand},
+            </if>
+            <if test="linkMan != null and linkMan != ''">
+                link_man = #{linkMan},
+            </if>
+            <if test="linkQQ != null and linkQQ != ''">
+                link_qq = #{linkQQ},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from<include refid="tableName"/>
+        where id = #{id}
+    </delete>
+
+
+</mapper>

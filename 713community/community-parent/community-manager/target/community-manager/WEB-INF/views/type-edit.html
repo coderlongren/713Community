@@ -1,0 +1,180 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://static.community.com/lib/html5.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/respond.min.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css"
+          id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>更新用户</title>
+    <meta name="keywords" content="">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-member-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">用户类型：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="user-type" name="userTypeId">
+
+				</select>
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">用户等级：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="user-rank" name="rankId">
+
+				</select>
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户积分：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="credits" name="credits">
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" id="edit-btn" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+
+        //加载用户信息
+        loadUserDate();
+        
+        //更新用户数据
+        $("#edit-btn").click(function () {
+            updateUser();
+        });
+    });
+
+    /*加载用户数据*/
+    function loadUserDate() {
+        var userId = parent.$("#user-edit-id").val();
+        $.ajax({
+            type : "get",//请求的方法，有get\post\delete\put
+            url : "/user/" + userId,
+            dataType : "json",//返回数据的类型，均用json
+            statusCode : {
+                200 : function (data) {
+                    $("#credits").val(data.user.credits);
+                    var types = data.types;
+                    var ranks = data.ranks;
+
+                    for (var i = 0; i < types.length; i++) {
+
+                        $("#user-type").append($("<option></option>")
+                            .attr("selected", types[i].id == data.user.userTypeId)
+                            .attr("value", types[i].id)
+                            .append(types[i].typeName));
+
+
+                    }
+                    for (var i = 0; i < ranks.length; i++) {
+                        $("#user-rank").append($("<option></option>")
+                            .attr("selected", ranks[i].id == data.user.rankId)
+                            .attr("value", ranks[i].id)
+                            .append(ranks[i].rankName));
+
+
+                    }
+                },
+                404 : function () {
+                    layer.msg('资源不存在', {time : 2000, icon : 0});
+                },
+                500 : function () {
+                    layer.msg('服务器出错', {time : 2000, icon : 0});
+                }
+            }
+        });
+    }
+
+    /*更新用户*/
+    function updateUser() {
+
+        var userId = parent.$("#user-edit-id").val();
+        layer.confirm("确认更新用户吗？",function (index) {
+            $.ajax({
+                type : "put",
+                url : "/user/" + userId,
+                data : {
+                    userTypeId : $("select[name='userTypeId'] option:selected").val(),
+                    rankId : $("select[name='rankId'] option:selected").val(),
+                    credits : $("#credits").val()
+                },
+                dataType : "json",
+                statusCode : {
+                    204 : function () {
+                        layer.msg('更新成功', {
+                            time : 0,
+                            icon : 6,
+                            btn : ['确定'],
+                            yes : function () {
+                                // 以下操作为关闭当前窗口，刷新父级页面
+                                var current_window = parent.layer.getFrameIndex(window.name);
+                                parent.$('#btn-refresh').click();
+                                parent.layer.close(current_window);
+                            }
+                        })
+                    },
+                    404 : function () {
+                        layer.msg('资源不存在', {time : 2000, icon : 0})
+                    },
+                    500 : function () {
+                        layer.msg('操作失败！服务器出错', {time : 2000, icon : 2})
+                    }
+                }
+
+            });
+        });
+
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

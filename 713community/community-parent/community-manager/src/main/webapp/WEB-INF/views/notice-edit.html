@@ -1,0 +1,210 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://lib.h-ui.net/html5.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/respond.min.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <link href="http://static.community.com/froalaEditor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <!--<link rel="stylesheet" href="http://static.community.com/summernote/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/summernote.css" />-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>修改公告信息</title>
+    <meta name="keywords" content="">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-notice-add">
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发布者：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公告标题：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发布状态：</label>
+            <div class="formControls col-xs-8 col-sm-9"><span class="select-box">
+                <select name="status" class="select">
+                    <option value="1">未发布</option>
+                    <option value="2">已发布</option>
+                    <option value="3">已下架</option>
+                </select>
+            </span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">公告内容：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <section id="editor2">
+                    <div id="content" style="margin-top: 10px;">
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" id="edit-btn" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script src="http://static.community.com/froalaEditor/js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<!--<script src="../js/froala_editor_ie8.min.js"></script>-->
+<![endif]-->
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/tables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/media_manager.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/block_styles.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/langs/zh_cn.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+
+        //加载公告信息
+        loadNoticeDate();
+
+        //更新公告数据
+        $("#edit-btn").click(function () {
+            layer.confirm("确认要修改吗？",function (index) {
+                updateNotice();
+            });
+
+        });
+
+        $('#content').editable({
+            inlineMode: false,
+            theme: 'gray',
+            //模版
+            height: '200px', //高度
+            alwaysBlank: true,
+            language: "zh_cn",
+            direction: "ltr",
+            allowedImageTypes: ["jpeg", "jpg", "png", "gif"],
+            autosave: true,
+            autosaveInterval: 2500,
+            saveURL: '/image/editor/upload',
+            /*saveParams: { postId: "123" },*/
+            spellcheck: true,
+            plainPaste: true,
+            imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
+            imageUploadURL: '/image/editor/upload',
+            /*imageParams: { postId: "123" },*/
+            enableScript: false
+
+        });
+    });
+
+    /*加载公告数据*/
+    function loadNoticeDate() {
+        //alert("aaaaaa");
+        var noticeId = parent.$("#notice-edit-id").val();
+        $.ajax({
+            type : "get",//请求的方法，有get\post\delete\put
+            url : "/notice/" + noticeId,
+            dataType : "json",//返回数据的类型，均用json
+            statusCode : {
+                200 : function (data) {
+                    $("#userName").val(data.userName);
+                    $("#title").val(data.title);
+                    $("select[name='status']").val(data.status);
+                    $(".froala-element").html(data.content);
+                },
+                404 : function () {
+                    layer.msg('资源不存在', {time : 2000, icon : 0});
+                },
+                500 : function () {
+                    layer.msg('服务器出错', {time : 2000, icon : 0});
+                }
+            }
+        });
+    }
+
+    /*更新公告*/
+    function updateNotice() {
+
+        var noticeId = parent.$("#notice-edit-id").val();
+
+        $.ajax({
+            type : "put",
+            url : "/notice/" + noticeId,
+            data : {
+                userName : $("#userName").val(),
+                title : $("#title").val(),
+                status : $("select[name='status'] option:selected").val(),
+                content : $(".froala-element").html()
+            },
+            dataType : "json",
+            statusCode : {
+                204 : function () {
+                    layer.msg('更新成功', {
+                        time : 0,
+                        icon : 6,
+                        btn : ['确定'],
+                        yes : function () {
+                            // 以下操作为关闭当前窗口，刷新父级页面
+                            var current_window = parent.layer.getFrameIndex(window.name);
+                            parent.$('#btn-refresh').click();
+                            parent.layer.close(current_window);
+                        }
+                    })
+                },
+                404 : function () {
+                    layer.msg('资源不存在', {time : 2000, icon : 0})
+                },
+                500 : function () {
+                    layer.msg('操作失败！服务器出错', {time : 2000, icon : 2})
+                }
+            }
+
+        });
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

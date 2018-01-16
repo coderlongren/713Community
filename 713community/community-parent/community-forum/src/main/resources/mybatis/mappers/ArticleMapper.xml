@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.forum.dao.ArticleDao">
+
+	<!--sql片段-->
+	<sql id="tableName">article</sql>
+
+	<resultMap id="articleResultMap" type="Article">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="realname" property="realname"/>
+		<result column="img" property="img"/>
+		<result column="time" property="time"/>
+		<result column="context" property="context"/>
+		<result column="url" property="url"/>
+		<result column="topic" property="topic"/>
+		<result column="title" property="title"/>
+		<result column="pageview" property="pageview"/>
+		<result column="check_flag" property="checkFlag"/>
+		<result column="show_flag" property="showFlag"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+
+	</resultMap>
+
+
+
+	<select id="listAll" resultMap="articleResultMap">
+		select *
+		from <include refid="tableName"/>
+	</select>
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="articleResultMap">
+		select * from <include refid="tableName"/>
+		where id = #{id}
+	</select>
+
+	<update id="update" parameterType="Article">
+		update <include refid="tableName"/>
+		<set>
+			<if test="realname != null and realname != ''">
+				realname = #{realname},
+			</if>
+			<if test="username != null and username != ''">
+				username = #{username},
+			</if>
+			<if test="img != null and img != ''">
+				img = #{img},
+			</if>
+			<if test="time != null and time != ''">
+				time = #{time},
+			</if>
+			<if test="context != null and context != ''">
+				context = #{context},
+			</if>
+			<if test="url != null and url != ''">
+				url = #{url},
+			</if>
+			<if test="topic != null and topic != ''">
+				topic = #{topic},
+			</if>
+			<if test="title != null and title != ''">
+				title = #{title},
+			</if>
+			<if test="pageview != null and pageview != ''">
+				pageview = #{pageview},
+			</if>
+			<if test="checkFlag != null and checkFlag != ''">
+				check_flag = #{checkFlag},
+			</if>
+			<if test="showFlag != null and showFlag != ''">
+				show_flag = #{showFlag},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		DELETE FROM <include refid="tableName"/>WHERE id=#{id}
+	</delete>
+
+	<insert id="insert" parameterType="Article">
+		insert into <include refid="tableName"/>
+		(username,realname,img,time,context,url,topic,title,pageview,check_flag,show_flag,create_time,update_time)
+		VALUES (#{username},#{realname},#{img},#{time},#{context},#{url},#{topic},#{title},#{pageview},#{checkFlag},#{showFlag},#{createTime},#{updateTime})
+	</insert>
+
+	<select id="listArticleWithSearch" resultMap="articleResultMap">
+		SELECT * FROM <include refid="tableName"/>
+		where realname LIKE #{searchVal} OR username LIKE #{searchVal} OR title LIKE #{searchVal} OR topic LIKE #{searchVal} OR context LIKE #{searchVal}
+	</select>
+
+</mapper>

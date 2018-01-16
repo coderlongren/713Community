@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>工作申请</title>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/jobApply.css">
+</head>
+<body>
+<div id="sel">
+</div>
+<div class="title">
+    <h2>
+        <span>713 Community 职位申请 -- <span id="jobName"></span></span>
+    </h2>
+</div>
+<div class="container main">
+    <h3>岗位职责</h3>
+    <div class="responsibility" id="responsibility">
+
+
+    </div>
+
+    <h3>岗位要求</h3>
+    <div class="requirement" id="requirement">
+
+    </div>
+
+</div>
+<div class="container">
+    <button class="btn btn-default btn-danger">开始申请</button>
+</div>
+<div style="margin-top:100px;"></div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="footer ">
+        <p>Copyright © 2005-2017 713 Community, All rights reserved. 鄂ICP备11111号-5 | © 2017 713 Community </p>
+    </div>
+</nav>
+</body>
+<script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script src="http://static.community.com/pages/js/jobApply.js"></script>
+
+<script>
+    $(function () {
+        //从当前页面url中解析出招新类型id
+        var href = window.location.href;
+        var str = href.split("/");
+        var typeId = str[3];
+        //加载导航栏数据
+        $("#sel").load("http://www.community.com/head.html");
+
+        //加载招新详情数据
+        viewRecruitInfo("http://www.community.com/rest/recruit/" + typeId + "/info");
+    });
+    function viewRecruitInfo(url) {
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "json",
+            statusCode: {
+                200: function (data) {
+                    //console.log(data);
+                    $("#jobName").append(data.recruitInfo.typeName);
+                    $('#responsibility').append(data.recruitInfo.duty);
+                    $('#requirement').append(data.recruitInfo.demand);
+                }
+            }
+        });
+    }
+</script>
+</html>

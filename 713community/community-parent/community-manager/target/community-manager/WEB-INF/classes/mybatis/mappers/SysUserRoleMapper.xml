@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.SysUserRoleDao">
+
+	<sql id="tableName">sys_user_role</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<resultMap id="sysUserRoleResultMap" type="SysUserRole">
+		<id column="id" property="id"/>
+		<result column="user_id" property="sysUserId"/>
+		<result column="role_id" property="roleId"/>
+
+	</resultMap>
+
+	<select id="listAll" resultMap="sysUserRoleResultMap">
+		select * from <include refid="tableName"/>
+	</select>
+
+	<insert id="insert" parameterType="SysUserRole">
+		insert into
+		<include refid="tableName"/>(user_id, role_id)
+		values(#{sysUserId}, #{roleId})
+	</insert>
+
+</mapper>

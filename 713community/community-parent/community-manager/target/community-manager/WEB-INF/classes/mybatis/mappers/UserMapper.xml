@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.UserDao">
+
+	<!--sql片段-->
+	<sql id="tableName">user</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<resultMap id="userResultMap" type="User">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="realname" property="realname"/>
+		<result column="password" property="password"/>
+		<result column="gender" property="gender"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="photo" property="photo"/>
+		<result column="class" property="userClass"/>
+		<result column="user_type_id" property="userTypeId"/>
+		<result column="birthday" property="birthDay"/>
+		<result column="rank_id" property="rankId"/>
+		<result column="credits" property="credits"/>
+		<result column="status" property="status"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="type_name" property="typeName"/>
+		<result column="rank_name" property="rankName"/>
+	</resultMap>
+
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+	<select id="listAll" resultMap="userResultMap">
+		select ut.typeName type_name,u.*, ur.`name` rank_name
+		from user u, user_type ut, user_rank ur
+		where u.user_type_id = ut.id and u.rank_id = ur.id
+	</select>
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="userResultMap">
+		select * from <include refid="tableName"/>
+		where id = #{id}
+	</select>
+
+	<select id="listUserWithSearch" resultMap="userResultMap">
+		SELECT * FROM(select ut.typeName type_name,u.*, ur.`name` rank_name
+		from user u, user_type ut, user_rank ur
+		where u.user_type_id = ut.id and u.rank_id = ur.id) t WHERE realname LIKE #{searchVal}
+
+	</select>
+
+	<update id="update" parameterType="User">
+		update <include refid="tableName"/>
+		<set>
+			<if test="username != null and username != ''">
+				username = #{username},
+			</if>
+			<if test="password != null and password != ''">
+				password = #{password},
+			</if>
+			<if test="realname != null and realname != ''">
+				realname = #{realname},
+			</if>
+			<if test="userTypeId != null and userTypeId != ''">
+				user_type_id = #{userTypeId},
+			</if>
+			<if test="userClass != null and userClass != ''">
+				class = #{userClass},
+			</if>
+			<if test="gender != null and gender != ''">
+				gender = #{gender},
+			</if>
+			<if test="email != null and email != ''">
+				email = #{email},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone = #{phone},
+			</if>
+			<if test="birthDay != null and birthDay != ''">
+				birthday = #{birthDay},
+			</if>
+			<if test="photo != null and photo != ''">
+				photo = #{photo},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status},
+			</if>
+			<if test="rankId != null and rankId != ''">
+				rank_id = #{rankId},
+			</if>
+			<if test="credits != null and credits != ''">
+				credits = #{credits},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		DELETE FROM <include refid="tableName"/>WHERE id=#{userId}
+	</delete>
+
+	<insert id="insert" parameterType="User">
+		insert into <include refid="tableName"/>
+		(username,realname,password,gender,phone,email,photo,class,user_type_id,birthday,rank_id,credits,status,create_time,update_time)
+		VALUES (#{username},#{realname},#{password},#{gender},#{phone},#{email},#{photo},#{userClass},#{userTypeId},#{birthDay},#{rankId},#{credits},#{status},#{createTime},#{updateTime})
+	</insert>
+
+</mapper>

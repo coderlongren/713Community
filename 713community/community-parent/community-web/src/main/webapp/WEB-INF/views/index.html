@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>713 Community</title>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/index.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css">
+
+</head>
+<body >
+
+<div id="sel">
+</div>
+
+    <div id="myCarousel" class="carousel slide container-fluid">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" href="#myCarousel"
+           data-slide="prev">&lsaquo;
+        </a>
+        <a class="carousel-control right" href="#myCarousel"
+           data-slide="next">&rsaquo;
+        </a>
+    </div>
+    <div class="title">
+        <h2>
+            <span>713 Community 操作指南</span>
+        </h2>
+    </div>
+
+    <div class="container middle">
+
+    </div>
+
+<div id="photo-list">
+    <ul id="scroll">
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+        <li><img  width="200px" height="150px" /></li>
+
+    </ul>
+</div>
+<div class="footer">
+        <p>Copyright © 2005-2017 713 Community, All rights reserved. 鄂ICP备11111号-5 | © 2017 713 Community </p>
+</div>
+<script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script src="http://static.community.com/pages/js/index.js"></script>
+<script>
+    $(function () {
+        //加载导航栏数据
+        $("#sel").load("http://www.community.com/head.html");
+
+        //加载首页主体数据
+        loadData("http://www.community.com/rest/index");
+    });
+
+    function loadData(url) {
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType : "json",
+            statusCode: {
+                200: function (data) {
+                    //console.log(data);
+                    $('.carousel-inner').empty();
+                    $('.middle').empty();
+                    //$('#scroll').empty();
+                    //加轮播图片
+                    $.each(data.indexTops, function (i, n) {
+                        if(i==0){
+                            var str = '<div class="item active"><img src=' + n.url + '></div>'
+                            $('.carousel-inner').append(str);
+                        }
+                        else{
+                            var str = '<div class="item "><img src=' + n.url + '></div>'
+                            $('.carousel-inner').append(str);
+                        }
+                    })
+                    //加中间图片
+                    $.each(data.indexMiddles,function (i,n) {
+                        var btnType = "";
+                        if (i == 0) {
+                            btnType = "btn-primary";
+                        } else if (i == 1) {
+                            btnType = "btn-success";
+                        } else {
+                            btnType = "btn-info";
+                        }
+                        $('.middle')
+                            .append($("<div class='mid-three'></div>")
+                                .append($("<img/>")
+                                    .attr("src", n.url)
+                                    .on('mouseenter', function () {
+                                        $(this).animate({
+                                            'margin-left':'-100px'
+                                        },500)
+                                    })
+                                    .on('mouseleave', function () {
+                                        $(this).animate({
+                                            'margin-left':'0px'
+                                        },500)
+                                    }))
+                                .append($("<h3></h3>")
+                                    .append(n.title))
+                                .append($("<p></p>")
+                                    .append(n.info))
+                                .append($("<button class='three-btn'></button>")
+                                    .addClass(btnType)
+                                    .attr("onclick", "window.open('" + n.linkUrl + "')")
+                                    .append(n.title)));
+                    })
+                    //加载滚动图片
+                    $.each(data.indexBottoms,function (i,n) {
+                        $("#scroll li img").eq(i).attr("src", n.url);
+
+                    })
+                },
+                500: function () {
+                    console.log("操作失败！服务器出错");
+                },
+                404: function () {
+                    console.log("资源不存在");
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

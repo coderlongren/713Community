@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>资源共享</title>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/cssReset.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/resShare_index.css"/>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/index.css">
+
+</head>
+<body>
+
+<div id="sel"></div>
+
+<!--轮播图的开始-->
+<div id="myCarousel" class="carousel slide container-fluid">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+
+    </div>
+<!-- 轮播（Carousel）导航 -->
+<a class="carousel-control left" href="#myCarousel"
+   data-slide="prev">&lsaquo;
+</a>
+<a class="carousel-control right" href="#myCarousel"
+   data-slide="next">&rsaquo;
+</a>
+</div>
+</div>
+<!--轮播图的结束-->
+
+<!--标题的开始-->
+<div class="title1">
+    <h1>713社区相关资源推荐</h1>
+    <p>713社区对资源进行了详细的分类，以提供更有效的获取资源途径</p>
+    <hr/>
+</div>
+
+<!--标题的结束-->
+
+<!--资源介绍的开始-->
+<div class="container resourceTypeInfo">
+    <!--由js进行控制-->
+</div>
+<!--资源介绍的结束-->
+
+<!--页脚的开始-->
+<div class="zend">
+    <small>
+        <ul>
+            <li><img src="http://static.community.com/pages/img/Link.png"/></li>
+            <li>友情链接：</li>
+            <li>版权所有 [2017]</li>
+            <li>713社区 地址：湖北省武汉市武昌区友谊大道368号</li>
+            <li>邮政编码：430062 鄂ICP备05003305</li>
+        </ul>
+    </small>
+    <br/>
+    <dl class="list-unstyled">
+        <dd><span class="glyphicon glyphicon-envelope"></span>联系我们:<a href="#">*******</a></dd>
+        <dd>邮箱地址:<a href="#">867253118@qq.com</a></dd>
+        <dd><span class="glyphicon glyphicon-phone-alt"></span>电话:<a href="#">13016224356</a></dd>
+    </dl>
+</div>
+<!--页脚的结束-->
+<script type="text/javascript" src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        //加载导航栏数据
+        $("#sel").load("http://resource.community.com/head.html");
+
+        //加载资源首页图片和信息
+        loadData("http://resource.community.com/resource/index");
+    });
+
+    function loadData(url) {
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType : "json",
+            statusCode: {
+                200: function (data) {
+                   //查询成功时带回的数据
+                    //console.log(data);
+                    $('.carousel-inner').empty();
+                    //$('#scroll').empty();
+                    //加轮播图片
+                    $.each(data.indexTops, function (i, n) {
+                        if(i==0){
+                            var str = '<div class="item active"><img src=' + n.url + '></div>'
+                            $('.carousel-inner').append(str);
+                        }
+                        else{
+                            var str = '<div class="item "><img src=' + n.url + '></div>'
+                            $('.carousel-inner').append(str);
+                        }
+                    })
+
+                    //加载资源类别信息
+                    var resourceTypeInfos = data.resourceTypes;
+                    console.log(resourceTypeInfos);
+                    //记录row的个数
+                    var r = -1;
+                    for (var i = 0; i < resourceTypeInfos.length; i++) {
+                        //如果一个row有4个信息的话，就在创建一个row
+                        if (i%4 == 0) {
+                            $(".resourceTypeInfo")
+                                .append($("<div class='row'></div>"))
+                            r++;
+                        }
+                        //append节点的追加，由括号可以看出追加在哪里
+                            $(".row").eq(r)
+                                .append($("<div class='col-md-3'></div>")
+                                    .append($("<div class='content'></div>")
+                                        .css({
+                                            "height":"340px"
+                                        })
+                                        .append($("<img/>")
+                                            .attr("src",resourceTypeInfos[i].url))
+                                        .append($("<h2></h2>")
+                                            .append($("<a></a>")
+                                                .text(resourceTypeInfos[i].name)
+                                                .attr("href", "http://resource.community.com/resShare_list.html?id="+ resourceTypeInfos[i].id)))
+                                        .append($("<p></p>")
+                                            .text(resourceTypeInfos[i].briefInfo)
+                                            .addClass("tip1"))
+                                        .append($("<p></p>")
+                                            .text(resourceTypeInfos[i].description)
+                                            .addClass("tip2"))))
+                    }
+                    },
+                    500: function () {
+                        console.log("操作失败！服务器出错");
+                    },
+                    404: function () {
+                        console.log("资源不存在");
+                    }
+                }
+            })
+    }
+
+</script>
+</body>
+</html>

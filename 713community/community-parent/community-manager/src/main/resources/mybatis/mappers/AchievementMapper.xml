@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.AchievementDao">
+
+	<!--sql片段-->
+	<sql id="tableName">achievement</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+         1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+         2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+ -->
+	<resultMap id="achievementResultMap" type="Achievement">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="bigintroduction" property="bigintroduction"/>
+		<result column="members" property="members"/>
+		<result column="type" property="type"/>
+		<result column="cooperation" property="cooperation"/>
+		<result column="show_flag" property="showFlag"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+	<!--多表关联查询出资源的信息-->
+	<select id="listAll" resultMap="achievementResultMap">
+		select * from <include refid="tableName"/>
+	</select>
+	<update id="updateAchievementById">
+		update <include refid="tableName"/> set show_flag=#{showFlag} where achievement.id=#{achievementId}
+	</update>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from <include refid="tableName"/> where id = #{id}
+	</delete>
+
+	<insert id="insert" parameterType="com.community.manager.entity.Achievement" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		<include refid="tableName"/>(name,bigintroduction,members,type,cooperation,show_flag,create_time, update_time)
+		values(#{name},#{bigintroduction},#{members},#{type},#{cooperation},#{showFlag},#{createTime},#{updateTime})
+	</insert>
+
+	<select id="listAchievementWithSearch" resultMap="achievementResultMap">
+		select * from <include refid="tableName"/> a
+		where a.${searchParam} like #{searchKeywords}
+	</select>
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="achievementResultMap">
+		select * from <include refid="tableName"/>
+		where id=#{id}
+	</select>
+
+	<update id="update" parameterType="Achievement">
+		update <include refid="tableName"/>
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="type != null and type != ''">
+				type = #{type},
+			</if>
+			<if test="cooperation != null and cooperation != ''">
+				cooperation = #{cooperation},
+			</if>
+			<if test="bigintroduction != null and bigintroduction != ''">
+				bigintroduction = #{bigintroduction},
+			</if>
+			<if test="members != null and members != ''">
+				members = #{members},
+			</if>
+			<if test="showFlag != null and showFlag != ''">
+				show_flag = #{showFlag},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper>

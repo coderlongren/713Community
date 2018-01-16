@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.SysMenuDao">
+
+	<sql id="tableName">sys_menu</sql>
+
+	<resultMap id="menuResultMap" type="SysMenu">
+		<id column="id" property="menuId"/>
+		<result column="name" property="menuName"/>
+		<result column="parent_id" property="parentId"/>
+		<result column="parent_name" property="parentName"/>
+		<result column="order_num" property="orderNum"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<select id="listMenuByParentId" parameterType="long" resultType="int">
+		select m.id
+		from sys_menu m
+		where m.parent_id = #{parentId}
+	</select>
+
+	<select id="listMenuWithSearch" resultMap="menuResultMap">
+		select m.id, m.parent_id, m.name, url, m.icon, m.perms, m.type, m.order_num,
+			(select name from sys_menu where id = m.parent_id) parent_name
+		from sys_menu m
+		where m.${param} like #{searchVal}
+	</select>
+
+	<select id="listAllMenu" resultMap="menuResultMap">
+		select m.id, m.parent_id, m.name, url, m.icon, m.perms, m.type, m.order_num,
+			(select name from sys_menu where id = m.parent_id) parent_name
+		from sys_menu m
+		where m.type = 1 or m.type = 0
+		order by m.order_num
+	</select>
+
+	<select id="listByType" parameterType="int" resultMap="menuResultMap">
+		select m.id, m.parent_id, m.name, url, m.icon, m.perms, m.type, m.order_num,
+			(select name from sys_menu where id = m.parent_id) parent_name
+		from sys_menu m
+		where m.type = #{type}
+		order by m.order_num
+	</select>
+
+	<select id="getMenuById" parameterType="long" resultMap="menuResultMap">
+		select id, parent_id, name, url, icon, perms, type
+		from <include refid="tableName"/>
+		where id = #{menuId}
+	</select>
+
+	<insert id="insertMenu" parameterType="SysMenu">
+		insert into <include refid="tableName"/>
+		(parent_id, name, url, icon, perms, type, order_num, create_time, update_time)
+		values(#{parentId}, #{menuName}, #{url}, #{icon}, #{perms},#{type}, #{orderNum}, #{createTime}, #{updateTime})
+	</insert>
+
+	<update id="updateMenu" parameterType="SysMenu">
+		update <include refid="tableName"/>
+		<set>
+			<if test="parentId != null and parentId != ''">
+				parent_id = #{parentId},
+			</if>
+			<if test="menuName != null and menuName != ''">
+				name = #{menuName},
+			</if>
+			<if test="url != null and url != ''">
+				url = #{url},
+			</if>
+			<if test="icon != null and icon != ''">
+				icon = #{icon},
+			</if>
+			<if test="perms != null and perms != ''">
+				perms = #{perms},
+			</if>
+			<if test="type != null and type != ''">
+				type = #{type},
+			</if>
+			<if test="orderNum != null and orderNum != ''">
+				order_Num = #{orderNum},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{menuId}
+	</update>
+
+	<delete id="removeMenuById" parameterType="long">
+		delete from <include refid="tableName"/> where id = #{menuId}
+	</delete>
+	
+	<!--<delete id="removeMenuByIds" parameterType="java.util.List">
+		delete from <include refid="tableName"/>
+		<where>
+			<if test="list != null and list != ''">
+				<foreach collection="list" open="and id in(" separator="," close=")" item="id">
+					#{id}
+				</foreach>
+			</if>
+		</where>
+	</delete>-->
+</mapper>

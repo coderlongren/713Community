@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.resource.dao.UserDao">
+
+    <!--定义sql片段-->
+    <sql id="tableName">user</sql>
+
+    <resultMap id="userResultMap" type="User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="realname" property="realname"/>
+        <result column="password" property="password"/>
+        <result column="gender" property="gender"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="photo" property="photo"/>
+        <result column="class" property="userClass"/>
+        <result column="user_type_id" property="userTypeId"/>
+        <result column="birthday" property="birthDay"/>
+        <result column="rank_id" property="rankId"/>
+        <result column="credits" property="credits"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="type_name" property="typeName"/>
+        <result column="rank_name" property="rankName"/>
+    </resultMap>
+
+    <!--根据用户名查询用户信息-->
+    <select id="getUserInfoByUsername" resultMap="userResultMap" parameterType="java.lang.String">
+        select * from <include refid="tableName"/> where username = #{username}
+    </select>
+
+</mapper>

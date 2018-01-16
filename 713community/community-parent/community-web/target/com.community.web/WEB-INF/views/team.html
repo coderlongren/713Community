@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>团队风采</title>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/team.css">
+
+
+</head>
+<body>
+<div id="sel">
+</div>
+<div class="container">
+    <h3>713 community宣言</h3>
+    <img src="http://static.community.com/pages/img/宣言.jpg" class="col-md-offset-1 img-responsive"/>
+    <h3>713 community团队风采及师资队伍</h3>
+    <div class="team row">
+        <!--团队左边的部分的开始-->
+        <div class="teamleft col-md-3">
+            <div class="box1">
+                <h2>团队介绍</h2>
+                <div class="sonteam1">团队风采</div>
+                <div class="sonteam2">师资力量</div>
+            </div>
+        </div>
+        <!--团队左边的部分的结束-->
+        <!--团队右边的部分的开始-->
+        <div class="teamright col-md-9">
+            <h3>团队风采</h3>
+            <div class="row" id='stu'>
+            </div>
+            <h3>师资队伍</h3>
+            <div class="row teacher" id='tea'>
+
+
+            </div>
+        </div>
+        <!--团队右边的部分的结束-->
+    </div>
+</div>
+<div class="footer">
+    <p>Copyright © 2005-2017 713 Community, All rights reserved. 鄂ICP备11111号-5 | © 2017 713 Community </p>
+</div>
+<script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script src="http://static.community.com/pages/js/team.js"></script>
+<script src="http://static.community.com/pages/js/holder.min.js"></script>
+<script>
+    $(function () {
+        //加载导航栏数据
+        $("#sel").load("http://www.community.com/head.html");
+
+        viewTeam("http://www.community.com/rest/team");
+    });
+    function viewTeam(url) {
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "json",
+            statusCode: {
+                200: function (data) {
+                    var stu = {};
+                    var tea = {};
+                    var i = 0, k = 0;
+                    var lista = "";
+                    var listb = "";
+                    $.each(data, function (i, result) {
+                        if (result['userTypeId'] == 1) {
+                            stu[i] = result;
+                            i++;
+                        }
+                        else {
+                            tea[k] = result;
+                            k++;
+                        }
+                    })
+                    $.each(stu, function (i, result) {
+                        lista += "<div class='col-md-4'>"
+                        lista += "<a href='http://www.community.com/" + result['realname'] + "/personInfo.html'><img src=" + result['photo'] + " class='img-responsive'></a>"
+                        lista += "<h4>+" + result['realname'] + "</h4>"
+                        lista += "<p class='page-text'>" + result['userClass'] + "</p>"
+                        lista += "</div>"
+                    });
+                    $('#stu').html(lista);
+                    $.each(tea, function (i, result) {
+                        listb += "<div class='col-md-3' >"
+                        listb += "<img src=" + result['photo'] + " class='img-circle img-responsive' style='width:120px;height:120px;' />"
+                        listb += "<p>" + result['realname'] + "</p>"
+                        listb += "<p>" + result['userClass'] + "</p>"
+                        listb += "<a class='btn btn-info btn-sm' href='http://www.community.com/" + result['realname'] + "/personInfo.html'>详情</a>"
+                        listb += "</div>"
+                    });
+                    $('#tea').html(listb);
+                },
+                404: function (data) {
+
+                },
+                500: function (data) {
+                    alert(Error);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

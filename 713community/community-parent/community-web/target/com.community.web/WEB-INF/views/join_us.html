@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>加入我们</title>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/joinUs.css">
+    <link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+
+</head>
+<body>
+<div id="sel">
+</div>
+<div class="title">
+    <h2>
+        <span>713 Community 加入我们</span>
+    </h2>
+</div>
+    <div  id="main" class="container">
+        <table>
+            <tr id="tr1">
+
+            </tr>
+            <tr id="tr2">
+                </tr>
+            <tr id="tr3">
+
+            </tr>
+            <tr id="tr4">
+                 </tr>
+        </table>
+    </div>
+<div class="footer">
+    <p>Copyright © 2005-2017 713 Community, All rights reserved. 鄂ICP备11111号-5 | © 2017 713 Community </p>
+</div>
+<script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script src="http://static.community.com/pages/js/joinUs.js"></script>
+<script src="http://static.community.com/pages/js/layer/layer.js"></script>
+<script>
+    $(function() {
+        //加载导航栏数据
+        $("#sel").load("http://www.community.com/head.html");
+
+        //加载页面
+        loadJoinUsData("http://www.community.com/rest/recruit/type");
+    });
+    function loadJoinUsData(url) {
+        $.ajax({
+            type : "get",
+            url : url,
+            dataType : "json",
+            statusCode : {
+                200 : function (data) {
+                    var images = data.recruitTypeImgs;
+                    var types = data.recruitTypes;
+                    var i;
+                    for (i = 0; i < 3; i++) {
+                        $("#tr1")
+                            .append($("<td></td>")
+                                .append($("<div class='classify'></div>")
+                                    .append($("<img/>")
+                                        .attr("src", images[i].url)
+                                        .on('mouseenter',function(){$(this).next().slideDown();}).on('mouseleave',function(){ $(this).next().slideUp();}))
+                                    .append($("<div class='txt'></div>")
+                                        .append($("<h2></h2>")
+                                            .append(types[i].recruitName ))
+                                        .append($("<p></p>")
+                                            .append("&nbsp;&nbsp;&nbsp;&nbsp;" + types[i].remark)))));
+
+                        $("#tr2")
+                            .append($("<td></td>")
+                                .append($("<button class='three-btn'></button>")
+                                    .attr("id", "btn" + i)
+                                    .attr("onclick", "window.open('http://www.community.com/" + types[i].id + "/job_apply.html')")
+                                    .append(types[i].recruitName )));
+                    }
+
+                    for (i = 3; i < images.length; i++) {
+                        $("#tr3")
+                            .append($("<td></td>")
+                                .append($("<div class='classify'></div>")
+                                    .append($("<img/>")
+                                        .attr("src", images[i].url)
+                                        .on('mouseenter',function(){$(this).next().slideDown();}).on('mouseleave',function(){ $(this).next().slideUp();}))
+                                    .append($("<div class='txt'></div>")
+                                        .append($("<h2></h2>")
+                                            .append(types[i].recruitName ))
+                                        .append($("<p></p>")
+                                            .append("&nbsp;&nbsp;&nbsp;&nbsp;" + types[i].remark)))));
+
+                        $("#tr4")
+                            .append($("<td></td>")
+                                .append($("<button class='three-btn'></button>")
+                                    .attr("id", "btn" + i)
+                                    .attr("onclick", "window.open('http://www.community.com/" + types[i].id + "/job_apply.html')")
+                                    .append(types[i].recruitName )));
+                    }
+                },
+                404 : function () {
+                    layer.msg('资源不存在',{time : 2000, icon : 0});
+                },
+                500 : function () {
+                    layer.msg('获取资源失败！服务器出错！',{time : 2000, icon : 2});
+                }
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

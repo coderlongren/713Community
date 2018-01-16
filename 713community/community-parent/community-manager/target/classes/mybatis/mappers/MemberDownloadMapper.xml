@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.MemberDownloadDao">
+
+    <sql id="tableName">member_download</sql>
+
+    <!--表字段与实体属性之间的映射规则-->
+    <resultMap id="memberDownloadResultMap" type="MemberDownload">
+        <id column="id" property="id"/>
+        <result column="sharer" property="sharer"/>
+        <result column="downloader" property="downloader"/>
+        <result column="ip" property="ip"/>
+        <result column="url" property="url"/>
+        <result column="resource_title" property="resourceTitle"/>
+        <result column="resource_type" property="resourceType"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getById" resultMap="memberDownloadResultMap">
+        select * from <include refid="tableName"/>
+        where id = #{id}
+    </select>
+
+    <select id="listAll" resultMap="memberDownloadResultMap">
+        SELECT * from <include refid="tableName"/>
+    </select>
+
+    <select id="listMemberDownloadInfo" parameterType="java.lang.String" resultMap="memberDownloadResultMap">
+        select * from <include refid="tableName"/>
+        where sharer like #{username}
+    </select>
+
+    <select id="listInfoWithSearch" resultMap="memberDownloadResultMap">
+        SELECT * FROM <include refid="tableName"/>
+        WHERE ${param} LIKE #{searchVal}
+    </select>
+
+    <insert id="insert" parameterType="MemberDownload">
+        insert into<include refid="tableName"/>
+        (sharer, downloader, ip, url, resource_title, resource_type, create_time, update_time)
+        values(#{sharer}, #{downloader}, #{ip}, #{url}, #{resourceTitle}, #{resourceType}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="MemberDownload">
+        update<include refid="tableName"/>
+        <set>
+            <if test="sharer != null and sharer != ''">
+                sharer = #{sharer},
+            </if>
+            <if test="downloader != null and downloader != ''">
+                downloader = #{downloader},
+            </if>
+            <if test="ip != null and ip != ''">
+                ip = #{ip},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="resourceTitle != null and resourceTitle != ''">
+                resource_title = #{resourceTitle},
+            </if>
+            <if test="resourceType != null and resourceType != ''">
+                resource_type = #{resourceType},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from<include refid="tableName"/>
+        where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.ArticleDao">
+
+	<!--sql片段-->
+	<sql id="tableName">article</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<resultMap id="articleResultMap" type="Article">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="realname" property="realname"/>
+		<result column="img" property="img"/>
+		<result column="time" property="time"/>
+		<result column="context" property="context"/>
+		<result column="url" property="url"/>
+		<result column="topic" property="topic"/>
+		<result column="title" property="title"/>
+		<result column="pageview" property="pageview"/>
+		<result column="check_flag" property="checkFlag"/>
+		<result column="show_flag" property="showFlag"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+
+	</resultMap>
+
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+	<select id="listAll" resultMap="articleResultMap">
+		select *
+		from <include refid="tableName"/>
+	</select>
+
+	<select id="getById" parameterType="java.lang.Long" resultMap="articleResultMap">
+		select * from <include refid="tableName"/>
+		where id = #{id}
+	</select>
+
+	<!--<select id="listUserWithSearch" resultMap="userResultMap">-->
+		<!--SELECT * FROM(select ut.typeName type_name,u.*, ur.`name` rank_name-->
+		<!--from user u, user_type ut, user_rank ur-->
+		<!--where u.user_type_id = ut.id and u.rank_id = ur.id) t WHERE realname LIKE #{searchVal}-->
+
+	<!--</select>-->
+
+	<update id="update" parameterType="Article">
+		update <include refid="tableName"/>
+		<set>
+			<if test="realname != null and realname != ''">
+				realname = #{realname},
+			</if>
+			<if test="username != null and username != ''">
+				username = #{username},
+			</if>
+			<if test="img != null and img != ''">
+				img = #{img},
+			</if>
+			<if test="time != null and time != ''">
+				time = #{time},
+			</if>
+			<if test="context != null and context != ''">
+				context = #{context},
+			</if>
+			<if test="url != null and url != ''">
+				url = #{url},
+			</if>
+			<if test="topic != null and topic != ''">
+				topic = #{topic},
+			</if>
+			<if test="title != null and title != ''">
+				title = #{title},
+			</if>
+			<if test="pageview != null and pageview != ''">
+				pageview = #{pageview},
+			</if>
+			<if test="checkFlag != null and checkFlag != ''">
+				check_flag = #{checkFlag},
+			</if>
+			<if test="showFlag != null and showFlag != ''">
+				show_flag = #{showFlag},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				update_time = #{updateTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		DELETE FROM <include refid="tableName"/>WHERE id=#{id}
+	</delete>
+
+	<insert id="insert" parameterType="Article">
+		insert into <include refid="tableName"/>
+		(username,realname,img,time,context,url,topic,title,pageview,check_flag,show_flag,create_time,update_time)
+		VALUES (#{username},#{realname},#{img},#{time},#{context},#{url},#{topic},#{title},#{pageview},#{checkFlag},#{showFlag},#{createTime},#{updateTime})
+	</insert>
+
+	<select id="listArticleWithSearch" resultMap="articleResultMap">
+		SELECT * FROM <include refid="tableName"/>
+		where realname LIKE #{searchVal} OR username LIKE #{searchVal} OR title LIKE #{searchVal} OR topic LIKE #{searchVal} OR context LIKE #{searchVal}
+	</select>
+
+</mapper>

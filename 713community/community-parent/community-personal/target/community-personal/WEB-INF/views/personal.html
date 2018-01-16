@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>713个人中心</title>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/zindex.css"/>
+    <link rel="stylesheet" href="http://static.community.com/pages/css/center.css">
+
+    <style>
+        * {
+            font-family: 微软雅黑;
+        }
+    </style>
+
+</head>
+<body>
+<!--修改个人信息-->
+<div class="container usercontainer">
+    <div id="mymodal" class='modal fade'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close" data-dismiss='modal'>&times;</div>
+                    <h3>修改个人信息</h3>
+                </div>
+                <div class="modal-body">
+                    <form action="" class='form-horizontal'>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label '>用户名:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class='form-control Username' placeholder='username'>
+                                <p class="help-block">由字母、数字、下划线组成，字母开头，4-16位 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <s></s>
+                                <span></span>
+                            </div>
+                        </div>
+                        <!--
+                            <div class="form-group">
+                                <label for="" class='col-sm-2 control-label'>修改密码:</label>
+                                <div class="col-md-6">
+                                    <input type="password" class='form-control password'placeholder="password" >
+                                    <p class="help-block">由大小写字母、数字组成 </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <s></s>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class='col-sm-2 control-label'>确认密码:</label>
+                                <div class="col-md-6">
+                                    <input type="password" class='form-control relpassword' placeholder='confirm password'>
+                                    <p class="help-block">由大小写字母、数字组成 </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <s></s>
+                                    <span></span>
+                                </div>
+                            </div>-->
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>昵称:</label>
+                            <div class="col-md-6">
+                                <input type="text" class='form-control nickname' placeholder="nickname">
+                                <p class="help-block">由字母、数字、下划线组成，字母开头，4-16位 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <s></s>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>性别:</label>
+                            <div class="radio pull-left">
+                                <label><input type="radio" name="sex"/>男</label>
+                            </div>
+                            <div class="radio pull-left">
+                                <label><input type="radio" name="sex"/>女</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>爱好:</label>
+                            <div class="checkbox pull-left">
+                                <label><input type="checkbox"/>唱歌</label>
+                            </div>
+                            <div class="checkbox pull-left">
+                                <label><input type="checkbox"/>跳舞</label>
+                            </div>
+                            <div class="checkbox pull-left">
+                                <label><input type="checkbox"/>旅游</label>
+                            </div>
+                            <div class="checkbox pull-left ">
+                                <label><input type="checkbox"/>运动</label>
+                            </div>
+                            <div class="checkbox pull-left ">
+                                <label><input type="checkbox"/>读书</label>
+                            </div>
+                            <div class="checkbox pull-left">
+                                <label><input type="checkbox"/>攀岩</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>出生日期:</label>
+                            <select class="form-control pull-left">
+                                <option value="1">1991年</option>
+                                <option value="2">1992年</option>
+                                <option value="3">1993年</option>
+                                <option value="4">1994年</option>
+                                <option value="5">1995年</option>
+                                <option value="6">1996年</option>
+                                <option value="7">1997年</option>
+                                <option value="8">1998年</option>
+                                <option value="9">1999年</option>
+                                <option value="10">2010年</option>
+                                <option value="11">2011年</option>
+                                <option value="12">2012年</option>
+                                <option value="13">2013年</option>
+                                <option value="14">2014年</option>
+                                <option value="15">2015年</option>
+                                <option value="16">2016年</option>
+                                <option value="17">2017年</option>
+
+                            </select>
+                            <select class="form-control pull-left">
+                                <option value="1">1月</option>
+                                <option value="2">2月</option>
+                                <option value="3">3月</option>
+                                <option value="4">4月</option>
+                                <option value="5">5月</option>
+                                <option value="6">6月</option>
+                                <option value="7">7月</option>
+                                <option value="8">8月</option>
+                                <option value="9">9月</option>
+                                <option value="10">10月</option>
+                                <option value="11">11月</option>
+                                <option value="12">12月</option>
+                            </select>
+                            <select class="form-control pull-left">
+                                <option value="1">1日</option>
+                                <option value="2">2日</option>
+                                <option value="3">3日</option>
+                                <option value="4">4日</option>
+                                <option value="5">5日</option>
+                                <option value="6">6日</option>
+                                <option value="7">7日</option>
+                                <option value="8">8日</option>
+                                <option value="9">9日</option>
+                                <option value="10">10日</option>
+                                <option value="11">11日</option>
+                                <option value="12">12日</option>
+                                <option value="13">13日</option>
+                                <option value="14">14日</option>
+                                <option value="15">15日</option>
+                                <option value="16">16日</option>
+                                <option value="17">17日</option>
+                                <option value="18">18日</option>
+                                <option value="19">19日</option>
+                                <option value="20">20日</option>
+                                <option value="21">21日</option>
+                                <option value="22">22日</option>
+                                <option value="23">23日</option>
+                                <option value="24">24日</option>
+                                <option value="25">25日</option>
+                                <option value="26">26日</option>
+                                <option value="27">27日</option>
+                                <option value="28">28日</option>
+                                <option value="29">29日</option>
+                                <option value="30">30日</option>
+                                <option value="31">31日</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>自我描述:</label>
+                            <div class="col-sm-6">
+                                <textarea rows="5" class='form-control' placeholder='自我描述'></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>邮箱:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class='form-control mail' placeholder='mail'>
+                                <p class="help-block">用户名（英文）@邮箱服务器名称 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <s></s>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>电话号码:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class='form-control phonenum' placeholder='phonenumber'>
+                                <p class="help-block">长度为11位 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <s></s>
+                                <span></span>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="button" class='btn btn-info save zedit' value="save"/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="button" class='btn btn-warning zedit ' data-dismiss='modal' value="close"/>
+                        </div>
+                    </div>
+                    <!--<button class='btn btn-primary save'>save</button>
+                    <button class='btn btn-default ' data-dismiss='modal'>close</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改个人信息-->
+<!--修改密码-->
+<div class="container usercontainer">
+    <div id="mymodal1" class='modal fade'>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close" data-dismiss='modal'>&times;</div>
+                    <h3>修改密码</h3>
+                </div>
+                <div class="modal-body">
+                    <form action="" class='form-horizontal'>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>旧密码:</label>
+                            <div class="col-md-6">
+                                <input type="password" class='form-control password' placeholder="password"
+                                       id='oldpass'>
+                                <p class="help-block">由大小写字母、数字组成 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="span1"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>修改密码:</label>
+                            <div class="col-md-6">
+                                <input type="password" class='form-control password' placeholder="password"
+                                       id="newpass">
+                                <p class="help-block">由大小写字母、数字组成 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="span2"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class='col-sm-2 control-label'>确认密码:</label>
+                            <div class="col-md-6">
+                                <input type="password" class='form-control relpassword' placeholder='confirm password'
+                                       id="conpass">
+                                <p class="help-block">由大小写字母、数字组成 </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="span3"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="button" class='btn btn-info save zedit' value="save"/>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="button" class='btn btn-warning zedit ' data-dismiss='modal' value="close"/>
+                        </div>
+                    </div>
+                    <!--<button class='btn btn-primary save'>save</button>
+                    <button class='btn btn-default ' data-dismiss='modal'>close</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改密码-->
+<div class="container">
+    <!--<div class="c_header">-->
+    <div class="col-md-2">
+
+        <div class="tooltip-demo">
+            <input type="file" id="tid"/>
+            <a href="#"><img src="http://static.community.com/pages/img/tx.jpg" id="zchangimg" width="180px" class="img-thumbnail img-circle "
+                             data-toggle="tooltip" data-placement="left" title="" data-original-title="修改头像"></a>
+        </div>
+    </div>
+
+    <a href='#mymodal' class='btn btn-default zbtn pull-right' data-toggle='modal'>修改个人资料 <span
+            class="glyphicon glyphicon-edit"></span></a>
+
+    <h1 class="page-header">
+        沉吟
+        <small>中国-湖北省-武汉市&nbsp;&nbsp;|&nbsp;&nbsp;女&nbsp;&nbsp;|&nbsp;&nbsp;1998-01-02</small>
+
+        <a href='#mymodal1' class='zbtn' data-toggle='modal'>修改密码 <span class="glyphicon glyphicon-edit"></span></a>
+
+    </h1>
+    <!--</div>-->
+
+    <!--<div class="z_list">
+        <div class="">
+            <div class="list-group">
+            <a href="" class="list-group-item active">动态</a>
+            <a href="" class="list-group-item">评论</a>
+            <a href="" class="list-group-item">收藏</a>
+            <a href="" class="list-group-item">分享</a>
+            <a href="" class="list-group-item">关注</a>
+        </div>
+    </div>-->
+
+    <!--<body data-spy='scroll' data-target='#mynav' data-offset='150'>-->
+    <div class="container" style="background:#F8F8F8; margin-top: 30px;width: 1200px;">
+        <nav class="navbar navbar-inverse" id='mynav'>
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">713社区</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav">
+                        <li class='active' id="main1"><a href="#">资讯</a></li>
+                        <li id="main2"><a href="#">动态</a></li>
+                        <li id="main3"><a href="#">收藏</a></li>
+                        <li id="main4"><a href="#">分享</a></li>
+                        <li id="main5"><a href="#">关注</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="col-md-3">
+            <h4>热门话题</h4>
+            <hr/>
+
+            <div class="alert">
+                <span class="close" data-dismiss='alert'>&times;</span>
+                <img src="http://static.community.com/pages/img/auto3.jpg">
+
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <button class="btn btn-default btn-block">社区首页</button>
+                <button class="btn btn-default btn-block">最新动态</button>
+                <button class="btn btn-default btn-block">新闻展示</button>
+                <button class="btn btn-default btn-block">论坛资讯</button>
+                <button class="btn btn-default btn-block">师资力量</button>
+            </div>
+        </div>
+        <div class="col-md-9 center-right" style="float: right;">
+
+            <div class="panel panel-success main1">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <p id='dynamic'><strong>最新资讯</strong></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--媒体对象-->
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+                    <hr/>
+                    <!--媒体对象-->
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+                    <hr/>
+                    <!--媒体对象-->
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-success main2">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <p id='comment'><strong>我的动态</strong></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--媒体对象-->
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+                </div>
+
+                <button class="btn col-md-offset-10" id="show">显示/隐藏更多</button>
+                <div class="more">
+                    <div class="panel-body">
+                        <!--媒体对象-->
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="media-object">
+                                    <img src="holder.js/100x100" alt="">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                    <p>
+                                        近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                        近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--媒体对象-->
+                    </div>
+                    <div class="panel-body">
+                        <!--媒体对象-->
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="media-object">
+                                    <img src="holder.js/100x100" alt="">
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                    <p>
+                                        近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                        近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--媒体对象-->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="panel panel-success main3">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <p id='collect'><strong>我的收藏</strong></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--媒体对象-->
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+                </div>
+            </div>
+
+            <div class="panel panel-success main4">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <p id='share'><strong>我的分享</strong></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="media-object">
+                                <img src="holder.js/100x100" alt="">
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <p><strong>苹果客服泄露个人信息该怎么办？</strong></p>
+                                <p>
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                    近年来韩国电影的崛起是有目共睹的，无论在战争，爱情还是动作等方面都在亚洲处于霸主地位，这对于中国电影来说，是个不小的刺激，其中最大的刺激，莫过于动作电影或者动作理念
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--媒体对象-->
+                </div>
+            </div>
+            <div class="panel panel-success main5">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <p id='focus'><strong>我的关注</strong></p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!--缩略图-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--缩略图-->
+                    <!--缩略图-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class='thumbnail'>
+                                <img src="holder.js/100%x160" alt="">
+                                <div class="caption">
+                                    <p align="center">用户名</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--缩略图-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--页脚-->
+<hr/>
+<div class="zend">
+    <small>
+        <ul>
+            <li><img src="http://static.community.com/pages/img/Link.png"/></li>
+            <li>友情链接：</li>
+            <li>版权所有 [2017]</li>
+            <li>713社区 地址：湖北省武汉市武昌区友谊大道368号</li>
+            <li>邮政编码：430062 鄂ICP备05003305</li>
+        </ul>
+    </small>
+    <br/>
+    <dl class="list-unstyled">
+        <dd><span class="glyphicon glyphicon-envelope"></span>联系我们:<a href="#">*******</a></dd>
+        <dd>邮箱地址:<a href="#">867253118@qq.com</a></dd>
+        <dd><span class="glyphicon glyphicon-phone-alt"></span>电话:<a href="#">13016224356</a></dd>
+    </dl>
+</div>
+<!--页脚-->
+<script type="text/javascript" src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+<script src="http://static.community.com/pages/js/center.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/holder.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/docs.min.js"></script>
+<script src="http://static.community.com/pages/js/zindex.js"></script>
+
+<script>
+    $('.save').click(function () {
+        alert('修改成功!');
+
+        //把modal隐藏
+        $('#mymodal').modal('hide');
+    });
+</script>
+<script>
+    $('.save').click(function () {
+//	alert('修改成功!');
+
+        //把modal隐藏
+        $('#mymodal1').modal('hide');
+    });
+</script>
+<script>
+    oldpassobj = document.getElementById('oldpass');
+    span1obj = document.getElementById('span1');
+    oldpassobj.onblur = function () {
+        if (oldpassobj.value.match(/\s/) || oldpassobj.value.length < 6)
+            span1obj.innerHTML = '密码格式错误，请重新输入！！';
+        else
+            span1obj.innerHTML = ' ';
+    }
+
+    newpassobj = document.getElementById('newpass');
+    span2obj = document.getElementById('span2');
+    newpassobj.onblur = function () {
+        if (newpassobj.value.match(/\s/) || newpassobj.value.length < 6)
+            span2obj.innerHTML = '密码格式错误，请重新输入！！';
+        else
+            span2obj.innerHTML = ' ';
+    }
+
+    conpassobj = document.getElementById('conpass');
+    span3obj = document.getElementById('span3');
+    conpassobj.onblur = function () {
+        if (conpassobj.value != newpassobj.value)
+            span3obj.innerHTML = '密码不一致，请重新输入！！';
+        else
+            span3obj.innerHTML = '';
+    }
+</script>
+<script>
+    tidobj = document.getElementById("tid");
+    zchangeobj = document.getElementById('zchangimg');
+    zchangeobj.onclick = function () {
+        tidobj.click();
+    }
+</script>
+<script>
+    $('#show').click(function () {
+        $('.more').toggle();
+    })
+</script>
+</body>
+
+</html>

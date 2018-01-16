@@ -1,0 +1,376 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://static.community.com/lib/html5.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/respond.min.js"></script>
+    <script type="text/javascript" src="http://static.community.com/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css"
+          id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/layui-v2.1.5/layui/css/layui.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>用户管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span
+        class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c"> 日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin"
+               class="input-text Wdate" style="width:120px;">
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax"
+               class="input-text Wdate" style="width:120px;">
+        <input type="text" class="input-text" style="width:250px" placeholder="输入用户真实姓名" id="search-input" name="search-input">
+        <button type="button" class="btn btn-success radius" id="searchBtn" name="searchBtn"><i class="Hui-iconfont">&#xe665;</i> 搜用户
+        </button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="datadel()"
+                                                               class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+        <a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"
+            class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span
+            class="r" >共有数据：<strong id="total-text"></strong> 条</span></div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr>
+                <th scope="col" colspan="16">用户列表</th>
+            </tr>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="25">ID</th>
+                <th width="50">用户类型</th>
+                <th width="100">用户名</th>
+                <th width="100">真实姓名</th>
+                <th width="25">性别</th>
+                <th width="90">手机</th>
+                <th width="90">邮箱</th>
+                <th width="50">职称/年级</th>
+                <th width="50">用户等级</th>
+                <th width="50">用户积分</th>
+                <th width="130">创建时间</th>
+                <th width="70">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody id="tb-body">
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<input type="text" id="user-edit-id" style="display: none;"/>
+
+<button id="btn-refresh" style="display:none">刷新</button>
+<div id="page-nav" style="float: right"></div>
+
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"
+        src="http://static.community.com/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="http://static.community.com/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="http://static.community.com/lib/layui-v2.1.5/layui/layui.js"></script>
+
+<script type="text/javascript" src="http://static.community.com/system/common.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        //加载用户列表数据
+        loadUsersData("/user/page/");
+
+        //刷新页面数据
+        $("#btn-refresh").click(function() {
+            window.location.reload();
+        });
+    });
+
+    /*加载用户列表数据*/
+    function loadUsersData(url) {
+        $.getJSON(url + '1',
+            function (res) { //从第1页开始请求。返回的json格式可以任意定义
+                laypage({
+                    cont: 'page-nav', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+                    pages: res.pageCount, //通过后台拿到的总页数
+                    curr: 1, //初始化当前页
+                    skin: '#5a98de',//皮肤颜色
+                    groups: 5, //连续显示分页数
+                    skip: true, //是否开启跳页
+                    count: res.total, //数据总数
+                    limit: 10, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                    limits: [10, 20, 30, 40, 50], //每页条数的选择项。如果 layout 参数开启了 limit，则会出现每页条数的select选择框
+                    first: '首页', //若不显示，设置false即可
+                    last: '尾页', //若不显示，设置false即可
+                    prev: '上一页', //若不显示，设置false即可
+                    next: '下一页', //若不显示，设置false即可
+                    jump: function (e) { //触发分页后的回调
+                        $.getJSON(url + e.curr, function (res) {
+
+                            var data = res.rows;
+                            $("#total-text").html(res.total);
+                            /*解析表格分页数据*/
+                            analysisUsersData(data);
+
+                        });
+                    }
+                });
+            });
+    }
+
+    $("#searchBtn").click(function () {
+        var searchVal = $("#search-input").val();
+        UserPageDataWithSearch("../../user/param/page/",searchVal);
+
+    });
+    /*根据用户名模糊查询用户*/
+    function UserPageDataWithSearch(url,paramVal) {
+        $.getJSON(
+            url+'1',
+            {
+                rows:10,
+                searchVal : paramVal
+            },
+            function (res) {
+                laypage({
+                    cont:'page-nav',
+                    page:res.pageCount,
+                    curr:1,
+                    skin:'#5a98de',
+                    group:5,
+                    skip:true,
+                    count:res.total,
+                    limit:10,
+                    limits:[10,20,30,40,50],
+                    first:'首页',
+                    last:'尾页',
+                    prev:'上一页',
+                    next:'下一页',
+                    jump:function (e) {
+                        $.getJSON(
+                            url+e.curr,
+                            {
+                                rows:10,
+                                searchVal:paramVal
+                            },function (res) {
+                                var data = res.rows;
+                                $("#total-text").html(res.total);
+                                analysisUsersData(data);
+                            }
+
+                        );
+                    }
+                });
+
+            }
+
+        );
+    }
+
+    /*解析表格分页数据*/
+    function analysisUsersData(data) {
+        //console.log(data);
+        var isUsedClass = "";
+        var isUsedTitle = "";
+        var isUesdText = "";
+        var isUsedBtn = "";
+        $("#tb-body").empty();
+
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].status == 1) {
+                isUsedClass = "label label-success radius";
+                isUsedTitle = "停用";
+                isUesdText = "已启用";
+                isUsedBtn = "member_stop(this," + data[i].id + ")";
+            } else {
+                isUsedClass = "label radius";
+                isUsedTitle = "启用";
+                isUesdText = "已停用"
+                isUsedBtn = "member_start(this," + data[i].id + ")"
+            }
+
+            $("#tb-body")
+                .append($("<tr class='text-c'></tr>")
+                    .append($("<td></td>")
+                        .append($("<input/>")
+                            .attr("type", "checkbox")
+                            .attr("value", data[i].id)))
+                    .append($("<td></td>")
+                        .append(data[i].id))
+                    .append($("<td></td>")
+                        .append(data[i].typeName))
+                    .append($("<td></td>")
+                        .append(data[i].username))
+                    .append($("<td></td>")
+                        .append(data[i].realname))
+                    .append($("<td></td>")
+                        .append(data[i].gender))
+                    .append($("<td></td>")
+                        .append(data[i].phone))
+                    .append($("<td></td>")
+                        .append(data[i].email))
+                    .append($("<td></td>")
+                        .append(data[i].userClass))
+                    .append($("<td></td>")
+                        .append(data[i].rankName))
+                    .append($("<td></td>")
+                        .append(data[i].credits))
+                    .append($("<td></td>")
+                        .append(new Date(data[i].createTime).Format("yyyy-MM-dd hh:mm:ss")))
+                    .append($("<td class='td-status'></td>")
+                        .append($("<span></span>")
+                            .addClass(isUsedClass)
+                            .append(isUesdText)))
+                    .append($("<td class='td-manage'></td>")
+                        .append($("<a style='text-decoration:none' href='javascript:;' title='" + isUsedTitle + "'></a>")
+                            .attr("onclick", isUsedBtn)
+                            .append($("<i class='Hui-iconfont'></i>")
+                                .append("&#xe631;")))
+                        .append($("<a style='text-decoration:none' href='javascript:;' title='编辑'></a>")
+                            .attr("onclick", "member_edit('编辑','member-edit.html'," + data[i].id + ")")
+                            .append($("<i class='Hui-iconfont'></i>")
+                                .append("&#xe6df;")))
+                        .append($("<a style='text-decoration:none' href='javascript:;' title='修改密码'></a>")
+                            .attr("onclick", "change_password('修改密码','change-password.html',"+data[i].id+",'600','270')")
+                            .append($("<i class='Hui-iconfont'></i>")
+                                .append("&#xe63f;")))
+                        .append($("<a style='text-decoration:none' href='javascript:;' title='删除' class='ml-5'></a>")
+                            .attr("onclick", "member_del(this," + data[i].id + ")")
+                            .append($("<i class='Hui-iconfont'></i>")
+                                .append("&#xe6e2;"))))
+                    .appendTo($("#tb-body")));
+        }
+
+
+    }
+
+    /*用户-添加*/
+    function member_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+    /*用户-查看*/
+    function member_show(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+    /*用户-停用*/
+    function member_stop(obj, id) {
+        layer.confirm('确认要停用吗？', function (index) {
+            changeUserStatus(obj, id, 2);
+        });
+    }
+
+    /*用户-启用*/
+    function member_start(obj, id) {
+        layer.confirm('确认要启用吗？', function (index) {
+            changeUserStatus(obj, id, 1);
+        });
+    }
+
+
+    function changeUserStatus(obj, id, status) {
+        $.ajax({
+            type : "put",
+            url : "/user/" + id,
+            data : {
+                status : status
+            },
+            dataType : "json",
+            statusCode : {
+                204 : function () {
+
+                    if (status == 1) {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+                        $(obj).remove();
+                        layer.msg('已启用', {
+                            time : 0,
+                            icon : 6,
+                            btn : ['确定'],
+                            yes : function () {
+                                //刷新页面
+                                $('#btn-refresh').click();
+
+                            }
+                        });
+                    } else {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+                        $(obj).remove();
+                        layer.msg('已停用', {
+                            time : 0,
+                            icon : 5,
+                            btn : ['确定'],
+                            yes : function () {
+                                //刷新页面
+                                $('#btn-refresh').click();
+
+                            }
+                        });
+                    }
+                },
+                404 : function () {
+                    layer.msg('资源不存在', {time : 2000, icon : 0})
+                },
+                500 : function () {
+                    layer.msg('操作失败！服务器出错', {time : 2000, icon : 2})
+                }
+            }
+        });
+    }
+
+    /*用户-编辑*/
+    function member_edit(title, url, id, w, h) {
+        $("#user-edit-id").val(id);
+        layer_show(title, url, w, h);
+    }
+    /*密码-修改*/
+    function change_password(title, url, id, w, h) {
+        $("#user-edit-id").val(id);
+        layer_show(title, url, w, h);
+    }
+    /*用户-删除*/
+    function member_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                type:"delete",
+                url:"../../user/"+id,
+                dataType:"json",
+                statusCode:{
+                    200:function () {
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除',{icon:1,time:1000});
+                    },
+                    500:function () {
+                        layer.msg('服务器出错',{icon:5,time:1000});
+                    }
+                }
+            });
+
+//            $(obj).parents("tr").remove();
+//            layer.msg('已删除!', {icon: 1, time: 1000});
+        });
+    }
+</script>
+</body>
+</html>

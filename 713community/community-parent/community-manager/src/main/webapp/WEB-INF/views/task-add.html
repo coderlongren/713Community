@@ -1,0 +1,198 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <LINK rel="Bookmark" href="http://static.community.com/favicon.ico">
+    <LINK rel="Shortcut Icon" href="http://static.community.com/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://lib.h-ui.net/html5.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/respond.min.js"></script>
+    <script type="text/javascript" src="http://lib.h-ui.net/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/Hui-iconfont/1.0.7/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/lib/icheck/icheck.css"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="http://static.community.com/static/h-ui.admin/css/style.css"/>
+    <link href="http://static.community.com/froalaEditor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <!--<link rel="stylesheet" href="http://static.community.com/summernote/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://static.community.com/summernote/css/summernote.css" />-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>添加任务信息</title>
+    <meta name="keywords" content="">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-resource-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>任务发布者：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="produceName" name="produceName">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>任务接受者：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="consumeName" name="consumeName">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">任务状态：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select class="select" size="1" id="status" name="status">
+                    <option value="1" selected>发布</option>
+                    <option value="2">不发布</option>
+                    <option value="3">未审核</option>
+                    <option value="4">已审核</option>
+				</select>
+				</span> </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>任务标题：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="title" name="title">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>任务积分：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" id="credits" name="credits">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>任务内容：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <section id="editor1">
+                    <div id="content" style="margin-top: 10px;">
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" id="submit-btn" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+<script src="http://static.community.com/froalaEditor/js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<!--<script src="../js/froala_editor_ie8.min.js"></script>-->
+<![endif]-->
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/tables.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/media_manager.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/block_styles.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/froalaEditor/js/langs/zh_cn.js"></script>
+<!--<script type="text/javascript" src="http://static.community.com/summernote/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/summernote/js/summernote.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/summernote/js/summernote-zh-CN.min.js"></script>-->
+
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    //入口函数
+    $(function () {
+        //提交添加表单的信息
+        $("#submit-btn").click(function () {
+            layer.confirm('确认要增加吗？', function (index) {
+                //添加资源信息
+                addTask();
+            });
+        });
+
+
+    });
+
+
+    $('#content').editable({
+        inlineMode: false,
+        theme: 'gray',
+        //模版
+        height: '200px', //高度
+        alwaysBlank: true,
+        language: "zh_cn",
+        direction: "ltr",
+        allowedImageTypes: ["jpeg", "jpg", "png", "gif"],
+        autosave: true,
+        autosaveInterval: 2500,
+        saveURL: '/image/editor/upload',
+        /*saveParams: { postId: "123" },*/
+        spellcheck: true,
+        plainPaste: true,
+        imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
+        imageUploadURL: '/image/editor/upload',
+        /*imageParams: { postId: "123" },*/
+        enableScript: false
+
+    });
+
+    /*添加任务信息*/
+    function addTask() {
+        $.ajax({
+            type : "post", // 请求的方法
+            url : "/task/", // 请求的后台地址
+            data : { // 要传给后台的参数数据，其中冒号左边是后台要接收的参数名，冒号右边的是参数对应的值
+                status : $("select[name='status'] option:selected").val(),
+                produceName : $("#produceName").val(),
+                consumeName : $("#consumeName").val(),
+                title : $("#title").val(),
+                credits : $("#credits").val(),
+                content : $(".froala-element:eq(0)").html()
+            },
+            statusCode : { //定义http响应码，表示当后台传来指定的响应码时执行对应的逻辑处理
+                201 : function () {
+                    layer.msg('添加成功', {
+                        time : 0,
+                        icon : 6,
+                        btn : ['确定'],
+                        yes : function () {
+                            // 以下操作为关闭当前窗口，刷新父级页面
+                            var current_window = parent.layer.getFrameIndex(window.name);
+                            parent.$('#btn-refresh').click();
+                            parent.layer.close(current_window);
+                        }
+                    });
+                },
+                500 : function () {
+                    layer.msg('操作失败！服务器出错！', {time : 2000, icon : 2});
+                }
+            }
+        });
+    }
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

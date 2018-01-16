@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+	  <head> 
+    	<meta charset="UTF-8"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>资源共享</title>
+		  <script src="http://static.community.com/pages/js/jquery-3.2.1.min.js"></script>
+        <link rel="stylesheet" type="text/css"  href="http://static.community.com/pages/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/cssReset.css" />
+        <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/common.css"/>
+        <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/resShare_scribe.css"/>
+        <link rel="stylesheet" href="http://static.community.com/pages/css/iconfont.css"  type="text/css"/>
+		    <link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+		    <link rel="stylesheet" href="http://static.community.com/pages/summernote-master/dist/summernote.css" />
+		   <script type="text/javascript" src="http://static.community.com/pages/js/bootstrap.min.js" ></script>
+		   <script src="http://static.community.com/pages/js/layer/layer.js"></script>
+
+		  <script type="text/javascript" src="http://static.community.com/pages/js/jquery.cookie.js"></script>
+		  <script type="text/javascript" src="http://static.community.com/system/common.js"></script>
+    </head>
+	<body>
+<!--导航栏的开始-->
+<nav  class="navbar navbar-default main navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<img style="margin-top: -15px ;height: 50px" class="img-responsive img" alt="713 Community" src="http://static.community.com/pages/img/logo2.png">
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-collapse menu">
+				<li><a href="index.html">首页 </a></li>
+				<li><a href="#">论坛</a></li>
+				<li><a href="resource_index.html">资源共享</a></li>
+				<li><a href="R-about1.html">关于我们</a></li>
+				<li><a href="center.html">个人中心</a></li>
+			</ul>
+			<form class="navbar-form navbar-left navbar-collapse">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<ul class="nav navbar-nav navbar-right menu">
+				<li><a href="register1.html"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+				<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!--导航栏的结束-->
+
+<div class="container-fluid text">
+	<div class="sonRoadSearch row">
+		<div class="sonRoad col-md-8">
+			<ol class="breadcrumb row">
+				<li>
+					<a href="http://resource.community.com/resource_index.html"><span class="glyphicon glyphicon-home"></span></a>
+				</li>
+				<li>
+					<a href="http://resource.community.com/resource_index.html">资源共享</a>
+				</li>
+			</ol>
+		</div>
+
+	</div>
+
+	<!--发帖以及分页的开始-->
+	<div class="sendText row " >
+		<marquee class="scroll" scrolldelay="5" scrollamount="4" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+			 您好！欢迎来到713社区！！
+		</marquee>
+		<button class="send col-md-2" >发帖</button>
+		<button class="resend col-md-2">回复</button>
+
+	</div>
+	<!--发帖以及分页的结束-->
+
+	<!--详情以及评论区的开始-->
+	<div class="scribleAndTalk row">
+		<div class="scrible col-md-2">
+
+			<!--上部-->
+			<div class="scrible-top">
+					<ul class="list-inline scrible-top01">
+
+				</ul>
+
+			</div>
+
+			<!--中部-->
+			<div class="scrible-mid">
+				<!--楼主名称-->
+			</div>
+			<!--下部-->
+			<div class="scrible-bottom">
+				<div class="scrible-content">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="talk col-md-10">
+
+		</div>
+	</div>
+	<!--详情以及评论区的结束-->
+
+	<!--评论的开始-->
+	<div class="resourceCommentDiv">
+
+	</div>
+	<!--评论的结束-->
+
+	<!--发帖以及分页的开始-->
+	<div class="sendText row">
+		<button class="resend col-md-2">回复</button>
+		<ul class="pagination col-md-8">
+			<li>
+				<a href="#">&laquo;</a>
+			</li>
+			<li>
+				<a href="#">1</a>
+			</li>
+			<li>
+				<a href="#">2</a>
+			</li>
+			<li>
+				<a href="#">3</a>
+			</li>
+			<li>
+				<a href="#">
+					<input type="text" name="" value="" class="page-text" /> /4页
+				</a>
+			</li>
+			<li>
+				<a href="#">&raquo;</a>
+			</li>
+		</ul>
+	</div>
+	<!--发帖以及分页的结束-->
+
+	<!--评论输入框开始-->
+	<div id="resend">
+		<textarea class="comment" placeholder="请输入你所要回复的内容" style="width: 600px;height: 100px; margin-left: 100px;display: block;"></textarea>
+		<button  id="commentLZBtn" class="btn btn-primary" style="margin-bottom: 10px;margin-top: 10px;margin-left: 100px">发表</button>
+	</div>
+	<!--评论输入框结束-->
+
+
+	<!--回复楼主的js脚本-->
+	<script>
+
+
+	</script>
+
+
+
+
+	<!--页脚的开始-->
+	<div class="zend">
+		<small>
+		          <ul>
+			          <li></li>
+			          <li>友情链接：</li>
+			          <li>版权所有 [2017]</li>
+			          <li>713社区 地址：湖北省武汉市武昌区友谊大道368号 </li>
+			          <li>邮政编码：430062 鄂ICP备05003305 </li> 
+		          </ul>
+		       </small>
+		<br/>
+		<dl class="list-unstyled">
+			<dd><span class="glyphicon glyphicon-envelope"></span>联系我们:
+				<a href="#">*******</a>
+			</dd>
+			<dd>邮箱地址:
+				<a href="#">867253118@qq.com</a>
+			</dd>
+			<dd><span class="glyphicon glyphicon-phone-alt"></span>电话:
+				<a href="#">13016224356</a>
+			</dd>
+		</dl>
+	</div>
+	<!--页脚的结束-->
+</div>
+
+<!--页面隐藏参数开始-->
+	<input type="text" id="resourceIdByUrl" style="display: none"/>
+	<input type="text" id="lastCommentFloor" style="display: none"/>
+	<input type="text" id="usernameInput" style="display: none"/>
+	<input type="text" id="currentCommentIdInput" style="display: none"/>
+	<input type="text" id="commentIds" style="display: none"/>
+<!--页面隐藏参数结束-->
+
+	<script type="text/javascript" src="http://static.community.com/pages/summernote-master/dist/summernote.js"></script>
+    <script type="text/javascript" src="http://static.community.com/pages/summernote-master/dist/lang/summernote-zh-CN.js"></script>
+
+
+	<script type="application/javascript">
+		//入口函数
+		$(function () {
+		    //切分url得到资源id
+            var Request = new Object();
+            Request = GetRequest();
+            var id =Request["id"]; //获取url中id值
+            $("#resourceIdByUrl").val(id);
+
+            //根据登录用户名加载用户信息，并存入cookie中
+            getUserInfoByUsername();
+
+		    //加载楼主和资源详情数据
+            loadLZAndResourceInfoData();
+			//加载对楼主的评论信息
+            loadResourceComment();
+
+        });
+
+
+        //截取url的id
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);  //截取?到后面的所有字符
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        function getUserInfoByUsername() {
+            <!--根据后台session中传来的username异步请求该用户的其他信息-->
+            //与sso整合之前，设置登录用户名是wangxi
+            $("#usernameInput").val("huangxx");
+            var username = $("#usernameInput").val();
+            $.ajax({
+                type : "get",
+                url : "http://resource.community.com/resource/comment/user/" + username,
+                dataType : "json",
+                statusCode : {
+                    200 : function (data) {
+                        var temp = data;
+						//把数据存入浏览器cookie中
+                        var strData = JSON.stringify(temp);
+                        $.cookie("userInfo",strData,{ path: "/", expiress: 30,sucue:true});
+                        //将字符串从cookie中取出来，转换成json格式数据
+                        //var userInfo = JSON.parse($.cookie("userInfo"));
+//                        console.log(userInfo.username);
+//                        console.log(userInfo.id);
+//                        console.log(userInfo.credits);
+                    },
+                    404 : function () {
+                        console.log("getUserInfoByUsername----资源未找到！")
+                    },
+                    500 : function () {
+                        console.log("getUserInfoByUsername----服务器出错！")
+                    }
+                }
+            })
+        }
+
+
+        //加载楼主和资源详情数据
+        function loadLZAndResourceInfoData() {
+            var resourceId = $("#resourceIdByUrl").val();
+            $.ajax({
+                type : "get",
+                url : "http://resource.community.com/resource/info/" + resourceId,				dataType : "json",
+                statusCode : {
+                    200 : function (data) {
+                        var resourceInfo = data.resource;
+                        var userImage = resourceInfo.user.photo;
+                        //如果头像是空，则使用默认的头像
+                        if (userImage == null) {
+                            userImage = "http://static.community.com/pages/img/01063aI7-5.jpg";
+                        }
+                        $(".breadcrumb li").eq(1)
+                            .after($("<li></li>")
+                                .append($("<a></a>")
+                                    .attr("href","http://resource.community.com/resShare_list.html?id=" + resourceInfo.typeId)
+                                    .text(resourceInfo.name)))
+                        $(".breadcrumb li").eq(2)
+                            .after($("<li></li>")
+                                .text(resourceInfo.title))
+
+                        //加载资源信息
+                        $(".list-inline")
+                            .append($("<li>查看: </li>"))
+                            .append($("<li></li>")
+                                .append($("<a></a>")
+                                    .text(resourceInfo.browseNum)))
+                            .append($("<li>回复: </li>"))
+                            .append($("<li></li>")
+                                .append($("<a></a>")
+                                    .text(resourceInfo.resourceComment)))
+
+                        $(".scrible-mid")
+                            .append($("<a></a>")
+                                .attr("href","#")
+                                .text(resourceInfo.user.username))
+
+                        $(".scrible-content")
+                            .append($("<div class='photo'></div>")
+                                .append($("<img class='img-responsive'/>")
+                                    .attr("src",userImage)))
+                            .append($("<ul class='scrContent01 clearfix'></ul>")
+                                .append($("<li></li>")
+                                    .append($("<a></a>")
+                                        .attr("href","")
+                                        .text(resourceInfo.user.resourceReleaseCount)))
+                                .append($("<li></li>")
+                                    .append($("<a></a>")
+                                        .attr("href","")
+                                        .text(resourceInfo.user.resourceReleaseCount)))
+                                .append($("<li></li>")
+                                    .append($("<a></a>")
+                                        .attr("href","")
+                                        .text(resourceInfo.user.credits)))
+                                .append($("<li>主题</li>"))
+                                .append($("<li>帖子</li>"))
+                                .append($("<li>积分</li>")))
+                            .append($("<div class='scrContentrank'></div>")
+                                .append($("<a></a>")
+                                    .attr("href","")
+                                    .append($("<i class='iconfont icon-zhuti1'></i>"))
+                                    .append($("<span>金牌VIP</span>")))
+                                .append($("<br/>"))
+                                .append($("<span></span>")
+                                    .append($("<i class='iconfont icon-zuozhe'></i>"))
+                                    //添加span元素显示文本，否则js加载顺序，样式出错
+                                    .append($("<span>积分： </span>"))
+                                    .append($("<a></a>")
+                                        .attr("href","")
+                                        .text(resourceInfo.user.credits))))
+
+                        $(".talk").addClass("col-md-10")
+                            .append($("<div class='talk-top row'></div>")
+                                .append($("<h2 class='talkTop-h2 col-md-4'></h2>")
+                                    .text(resourceInfo.title)))
+                            .append($("<div class='talk-nav'></div>")
+                                .append($("<ul class='list-inline talkNav'></ul>")
+                                    .append($("<li></li>")
+                                        .text("发表于" + new Date(resourceInfo.releaseTime).Format("yyyy-MM-dd hh:mm:ss")))
+                                    .append($($("<li></li>")
+                                        .append($("<a>只看该作者</a>"))))
+                                    .append($($("<li></li>")
+                                        .append($("<a>回复</a>")
+                                            .attr("href","#"))))
+                                    .append($($("<li></li>")
+                                        .append($("<a>楼主</a>"))))))
+                            .append($("<div class='talk-content'></div>")
+                                .append(resourceInfo.content)
+                                .append($("<div></div>")
+                                    .css({
+                                        "margin-top" : "10px"
+                                    })
+                                    .append($("<a></a>")
+                                        .css({
+                                            "font-size" : "20px"
+                                        })
+                                        .attr("href",resourceInfo.url)
+                                        .text("资源链接：" + resourceInfo.url))))
+
+                    },
+                    404 : function () {
+                        console.log("资源找不到！")
+                    },
+                    500 : function () {
+                        console.log("服务器错误！")
+                    }
+                }
+            });
+        }
+
+
+        var commentIds = "";
+
+        function loadResourceComment() {
+            //加载评论楼主的评论
+            var resourceId = $("#resourceIdByUrl").val();
+            $.ajax({
+                type : "get",
+                url : "http://resource.community.com/resource/comment/" + resourceId + "/page/" + 1,
+                dataType : "json",
+                statusCode : {
+                    200 : function (data) {
+                        var resourceComments = data.rows;
+                        //初始化最初的楼层号
+                        $("#lastCommentFloor").val(resourceComments.length);
+                        for (var i = 0; i < resourceComments.length; i++) {
+
+                            commentIds = commentIds + resourceComments[i].id + ",";
+                            $("#commentIds").val(commentIds);
+
+                            dynamicAppendCommentDiv(i,resourceComments);
+                        }
+
+                        //加载评论普通用户的评论
+                        loadCommonResourceComment();
+                    },
+                    404 : function () {
+                        console.log("资源未找到！")
+                    },
+                    500 : function () {
+                        console.log("服务器出错！")
+                    }
+                }
+            })
+        }
+
+
+        //加载评论普通用户的评论
+       function loadCommonResourceComment() {
+
+		   var commentIds = $("#commentIds").val();
+
+           $.ajax({
+               type : "get",
+               url : "http://resource.community.com/resource/comment/" + commentIds,
+               dataType : "json",
+               statusCode : {
+                   200 : function (data) {
+						console.log(data);
+                   },
+                   404 : function () {
+                       console.log("加载评论普通用户的评论,404未找到！")
+                   },
+                   500 : function () {
+                       console.log("加载评论普通用户的评论,服务器出错！！")
+                   }
+
+               }
+           })
+
+       }
+
+        //把动态添加每个人评论框的js脚本抽取出来
+        function dynamicAppendCommentDiv(i,resourceComments) {
+            var userImage = resourceComments[i].user.photo;
+            if (userImage == null) {
+                userImage = "http://static.community.com/pages/img/tx.jpg";
+            }
+            $(".resourceCommentDiv")
+                .append($("<div class='personTalkConent row'></div>")
+                    .append($("<div class='personTalk col-md-2'></div>")
+                        .append($("<div class='personTalk-mid'></div>")
+                            .append($("<a></a>")
+                                .attr("href",resourceComments[i].resourceCommentUserVo.userurl)
+                                .text(resourceComments[i].resourceCommentUserVo.username)))
+                        .append($("<div class='personTalk-bottom'></div>")
+                            .append($("<div class='personTalk-content'></div>")
+                                .append($("<div class='personTalkphoto'></div>")
+                                    .append($("<img class='img-responsive'/>")
+                                        .attr("src",userImage)))
+                                .append($("<ul class='personTalk01 clearfix'></ul>")
+                                    .append($("<li></li>")
+                                        .append($("<a></a>")
+                                            .text(resourceComments[i].user.resourceReleaseCount)))
+                                    .append($("<li></li>")
+                                        .append($("<a></a>")
+                                            .text(resourceComments[i].user.resourceReleaseCount)))
+                                    .append($("<li></li>")
+                                        .append($("<a></a>")
+                                            .text(resourceComments[i].user.credits)))
+                                    .append($("<li>主题</li>"))
+                                    .append($("<li>帖子</li>"))
+                                    .append($("<li>积分</li>")))
+                                .append($("<div class='personrank'></div>")
+                                    .append($("<a></a>")
+                                        .attr("href","#")
+                                        .append($("<i class='iconfont icon-zhuti1'></i>"))
+                                        .append($("<span>金牌VIP</span>")))
+                                    .append($("<br/>"))
+                                    .append($("<span></span>")
+                                        .append($("<i class='iconfont icon-zuozhe'></i>"))
+                                        .append($("<span>积分: </span>"))
+                                        .append($("<a></a>")
+                                            .text(resourceComments[i].user.credits)))))
+                        ))
+                    .append($("<div class='talkContent col-md-10'></div>")
+                        .append($("<div class='talkContent-nav'></div>")
+                            .append($("<ul class='list-inline talkContentNav'></ul>")
+                                .append($("<li></li>")
+                                    .text("发布于 " + new Date(resourceComments[i].releaseTime).Format("yyyy-MM-dd hh:mm:ss")))
+                                .append($("<li></li>")
+                                    .append($("<a></a>")
+                                        .text("只看该作者")
+                                        .attr("href","javascript:void(0)")))
+                                .append($("<li></li>")
+                                    .append($("<a class='aText'></a>")
+                                        .css({
+                                            "text-decoration" : "none"
+                                        })
+                                        .attr("href","javascript:void(0)")
+                                        .attr("onclick","commentClick(this," + resourceComments[i].id + ");")
+                                        .text("回复")
+                                    ))
+                                .append($($("<li></li>")
+                                    .append($("<a></a>")
+                                        .text(resourceComments[i].floor + "楼"))))))
+                        .append($("<div class='talkContent-content'></div>")
+                            .append(resourceComments[i].comment))
+                    ))
+        }
+
+
+        //解决多个div绑定同一个点击事件，点击一个div链接，只显示当前的div的效果
+        /**
+         * jquery 获取元素(父节点,子节点,兄弟节点)
+         * 		 $("#test1").parent(); // 父节点
+         $("#test1").parents(); // 全部父节点
+         $("#test1").parents(".mui-content");
+         $("#test").children(); // 全部子节点
+         $("#test").children("#test1");
+         $("#test").contents(); // 返回#test里面的所有内容，包括节点和文本
+         $("#test").contents("#test1");
+         $("#test1").prev();  // 上一个兄弟节点
+         $("#test1").prevAll(); // 之前所有兄弟节点
+         $("#test1").next(); // 下一个兄弟节点
+         $("#test1").nextAll(); // 之后所有兄弟节点
+         $("#test1").siblings(); // 所有兄弟节点
+         $("#test1").siblings("#test2");
+         $("#test").find("#test1");
+         * @param e
+         */
+        //点击回复链接弹出回复框的js脚本（传入当前对象,当前评论的id）
+        function commentClick(e,id) {
+
+            $("#currentCommentIdInput").val(id);
+
+            $(e).parents(".talkContent-nav")
+                .siblings(".talkContent-content")
+                /**
+                 * 注意：在用当前对象找到父对象时，再想添加节点时,
+                 * 不能用append()方法，会不识别append操作。用after(),然后再append
+                 */
+                .after($("<div class='dynamicDiv'></div>")
+                    .css({
+                        "width":"10px",
+                        "height":"10px",
+                        "display" : "none"
+                    }))
+                //为了下面动态添加准备
+                .after($("<div class='aComment'></div>")
+                    .css({
+                        "position" : "absolute"
+                    })
+                    .append($("<textarea class='comment' placeholder='请输入你所要回复的内容'></textarea>")
+                        .css({
+                            "width":"500px",
+                            "height":"100px",
+                            "background" : "white",
+                            "margin-top" : "20px",
+                            "margin-left" : "20px"
+                        }))
+                    //字级div随上级div进行浮动
+                    .append($("<div></div>")
+                        .css({
+                            "position" : "absolute",
+                            "right" : 0
+                        })
+                        .append($("<button class='btn btn-primary'>发表</button>")
+                            .attr("onclick","commentOthers(this)")
+                            .css({
+                                "margin-top" : "10px",
+                            }))))
+
+            //当前对象的属性变化
+            $(e).html("点击收起")
+            //javascript点击相同的链接或者按钮两次触发不同的事件
+            e.onclick = hideCommentDiv;
+        }
+        function hideCommentDiv() {
+            var id = $("#currentCommentIdInput").val();
+
+            $(".aComment").hide();
+            $(".aText")
+                .attr("onclick","commentClick(this," + id + ")")
+                .html("回复");
+        }
+
+        //评论其他人
+        function commentOthers(e) {
+            var resourceId = $("#resourceIdByUrl").val();
+            var currentCommentId = $("#currentCommentIdInput").val();
+            $.ajax({
+                type : "post",
+                url : "http://resource.community.com/resource/comment/common/" + resourceId,
+                data : {
+                    parentId : currentCommentId,
+                    comment : $(".comment").val()
+                    //其他数据再后台进行处理
+                },
+                statusCode : {
+                    201 : function () {
+
+                        var userInfo = JSON.parse($.cookie("userInfo"));
+
+                        hideCommentDiv();
+                        dynamicAppendCommentOthersDiv(e,userInfo);
+                    },
+                    500 : function () {
+                        console.log("增加回复普通用户评论，服务器出错！")
+                    }
+                }
+            })
+        }
+
+        function dynamicAppendCommentOthersDiv(e,userInfo) {
+
+            var userImg = userInfo.photo;
+            if (userImg == null) {
+                userImg = "http://static.community.com/pages/img/tx.jpg";
+            }
+
+            $(e).parents(".aComment")
+                .siblings(".dynamicDiv").last()
+                .after($("<div class='dynamicDiv'></div>")
+                    .css({
+                        "margin-top" : "20px",
+                        "margin-left" : "100px"
+                    })
+                    .append($("<img src=" + userImg +">")
+                        .css({
+                            "width" : "30px",
+                            "height" : "30px"
+                        }))
+                    .append($("<span></span>")
+                        .text(userInfo.username + "评论：")
+                        .css({
+                            "padding-left" : "5px",
+                            "color" : "blue"
+                        }))
+                    .append($("<span></span>")
+                        .css({
+                            "padding-left" : "5px"
+                        })
+                        .text($(".comment").val()))
+                )
+        }
+
+        //为给楼主评论的按钮添加点击事件
+        $("#commentLZBtn").click(function () {
+            //评论楼主
+            commentLZ();
+        });
+        function commentLZ() {
+            var resourceId = $("#resourceIdByUrl").val();
+            $.ajax({
+                type : "post",  //增加记录 put:更新数据
+                url : "http://resource.community.com/resource/comment/" + resourceId,
+                data : {
+                    floor : $("#lastCommentFloor").val(),
+                    comment : $(".comment").val()
+                    //其他字段在后台会做处理
+                },
+                statusCode : {
+                    //添加成功
+                    201 : function () {
+                        /**
+                         *  	1.在前端页面放一个接收后台传过来的session中的username
+                         * 		2.根据username,ajax查询该用户的id,photo,credits，该用户发布资源总数
+                         * 		3.把其他该展示的数据存入数据库中
+                         * 		4.然后把上述信息展示在前端页面
+                         */
+                            //重新加载此页面（发送页面的所有ajax请求，不合理）
+                            //window.location.reload();
+                            //异步加载信息
+
+                        var userInfo = JSON.parse($.cookie("userInfo"));
+
+                        var lastCommentFloor = parseInt($("#lastCommentFloor").val()) + 1;
+                        $("#lastCommentFloor").val(lastCommentFloor);
+                        var resourceComment= [{
+                            "floor":  lastCommentFloor,
+                            "releaseTime": new Date(),
+                            "comment": $(".comment").val(),
+                            "user": {
+                                "photo": userInfo.photo,
+                                "credits": userInfo.credits,
+                                "resourceReleaseCount": userInfo.resourceReleaseCount
+                            },
+                            "resourceCommentUserVo": {
+                                "username": userInfo.username,
+                                "userurl": "http://personal.community.com/user/wangxi"
+                            }
+                        }]
+
+                        dynamicAppendCommentDiv(0,resourceComment);
+                        $(".comment").val("");
+                    },
+                    500 : function () {
+                        console.log("服务器出错！")
+                    }
+                }
+
+            })
+        }
+
+	</script>
+	</body>
+</html>
+

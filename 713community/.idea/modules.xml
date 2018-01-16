@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-web/com.community.web.iml" filepath="$PROJECT_DIR$/community-parent/community-web/com.community.web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-common/community-common.iml" filepath="$PROJECT_DIR$/community-parent/community-common/community-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-forum/community-forum.iml" filepath="$PROJECT_DIR$/community-parent/community-forum/community-forum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-manager/community-manager.iml" filepath="$PROJECT_DIR$/community-parent/community-manager/community-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-parent.iml" filepath="$PROJECT_DIR$/community-parent/community-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-personal/community-personal.iml" filepath="$PROJECT_DIR$/community-parent/community-personal/community-personal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-resource/community-resource.iml" filepath="$PROJECT_DIR$/community-parent/community-resource/community-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/community-parent/community-sso/community-sso.iml" filepath="$PROJECT_DIR$/community-parent/community-sso/community-sso.iml" />
+    </modules>
+  </component>
+</project>

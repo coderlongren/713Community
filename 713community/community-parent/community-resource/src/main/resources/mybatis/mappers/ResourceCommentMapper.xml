@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.resource.dao.ResourceCommentDao">
+
+    <!--sql片段-->
+    <sql id="tableName">resource_comment</sql>
+
+    <resultMap id="resourceCommentResultMap" type="ResourceComment">
+        <id column="id" property="id"/>
+        <result column="resource_id" property="resourceId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="floor" property="floor"/>
+        <result column="username" property="username"/>
+        <result column="img" property="img"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="comment" property="comment"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+
+        <!--配置一对一关系-->
+        <association property="user" javaType="com.community.resource.entity.User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="realname" property="realname"/>
+            <result column="password" property="password"/>
+            <result column="gender" property="gender"/>
+            <result column="phone" property="phone"/>
+            <result column="email" property="email"/>
+            <result column="photo" property="photo"/>
+            <result column="class" property="userClass"/>
+            <result column="user_type_id" property="userTypeId"/>
+            <result column="birthday" property="birthDay"/>
+            <result column="rank_id" property="rankId"/>
+            <result column="credits" property="credits"/>
+            <result column="status" property="status"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="type_name" property="typeName"/>
+            <result column="rank_name" property="rankName"/>
+        </association>
+
+    </resultMap>
+
+    <!--根据资源id查询资源的评论数量-->
+    <select id="countResourceComment" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(*) from resource,resource_comment
+          where resource_comment.resource_id = resource.id and resource.id = #{resourceId}
+    </select>
+
+    <!--根据资源id查询资源所有评论-->
+    <select id="listAllCommentByResourceId" resultMap="resourceCommentResultMap" parameterType="java.lang.Long">
+        select * from <include refid="tableName"/> WHERE resource_comment.resource_id = #{resourceId} AND resource_comment.parent_id = 0
+
+    </select>
+
+    <insert id="insertComment" parameterType="ResourceComment">
+        INSERT INTO <include refid="tableName"/>
+        (resource_id,parent_id,floor,username,img,release_time,comment,create_time,update_time)
+        VALUES (#{resourceId},#{parentId},#{floor},#{username},#{img},#{releaseTime},#{comment},#{createTime},#{updateTime})
+    </insert>
+
+    <select id="listByCommentIds" parameterType="java.util.List" resultMap="resourceCommentResultMap">
+        select *
+        from <include refid="tableName"/> r
+        <where>
+            <if test="list != null and list != ''">
+                <foreach collection="list" open="and r.parent_id in (" separator="," close=")" item="parentId">
+                    #{parentId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <!--<select id="listAll" resultMap="resourceCommentResultMap">-->
+        <!--SELECT * FROM <include refid="tableName" />-->
+    <!--</select>-->
+
+    <!--<select id="getById" resultMap="resourceCommentResultMap">-->
+        <!--SELECT * FROM <include refid="tableName" />-->
+        <!--WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<insert id="insert" parameterType="ResourceComment">-->
+        <!--INSERT INTO <include refid="tableName"/>-->
+        <!--(parent_id,floor,username,img,release_time,comment,create_time,update_time)-->
+        <!--VALUES (#{parentId},#{floor},#{username},#{img},#{releaseTime},#{comment},#{createTime},#{updateTime})-->
+
+    <!--</insert>-->
+
+    <!--<delete id="deleteById" parameterType="java.lang.Long">-->
+        <!--DELETE FROM <include refid="tableName"/>-->
+        <!--WHERE id = #{dynamicCommentId}-->
+    <!--</delete>-->
+
+    <!--<select id="listAllWithSearch" parameterType="java.lang.String" resultMap="resourceCommentResultMap">-->
+        <!--SELECT * FROM <include refid="tableName"/>-->
+        <!--WHERE username LIKE #{val} OR comment LIKE #{val}-->
+    <!--</select>-->
+
+</mapper>

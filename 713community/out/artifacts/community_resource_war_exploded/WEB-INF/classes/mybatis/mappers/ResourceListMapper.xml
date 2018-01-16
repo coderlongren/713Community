@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.resource.dao.ResourceListDao">
+
+	<!--sql片段-->
+	<sql id="tableName">resource</sql>
+
+	<resultMap id="resourceResultMap" type="Resource">
+		<id column="id" property="id"/>
+		<result column="user_username" property="username"/>
+		<result column="typename" property="name"/>
+		<result column="resource_content" property="content"/>
+		<result column="user_id" property="userId"/>
+		<result column="type_id" property="typeId"/>
+		<result column="author" property="author"/>
+		<result column="release_time" property="releaseTime"/>
+		<result column="browse_num" property="browseNum"/>
+		<result column="down_num" property="downNum"/>
+		<result column="title" property="title"/>
+		<result column="show_flag" property="showFlag"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+
+	<resultMap id="resourceResultSearchMap" type="Resource">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="name" property="name"/>
+		<result column="count" property="count"/>
+		<result column="content" property="content"/>
+		<result column="user_id" property="userId"/>
+		<result column="type_id" property="typeId"/>
+		<result column="author" property="author"/>
+		<result column="release_time" property="releaseTime"/>
+		<result column="browse_num" property="browseNum"/>
+		<result column="down_num" property="downNum"/>
+		<result column="title" property="title"/>
+		<result column="show_flag" property="showFlag"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<!--根据资源类别id查询该类别资源的每日发布总量-->
+	<select id="countResourceTotal" resultType="java.lang.Integer">
+		select count(*) from resource
+		  where resource.release_time like #{date} and resource.type_id = #{resourceTypeId}
+	</select>
+
+	<!--根据资源类别查询每个资源的总数量-->
+	<select id="countResourceByResourceType" resultMap="resourceResultSearchMap">
+		SELECT count(type_id) count,name from
+	(SELECT resource_type.id id,resource_type.name,resource.type_id,release_time from resource_type LEFT OUTER JOIN resource on (resource.type_id = resource_type.id)) t
+	 GROUP BY(t.id)
+	</select>
+
+	<!--多表关联查询出资源的信息-->
+	<select id="listAll" resultMap="resourceResultMap">
+		select `user`.username user_username,resource_type.`name` typename,resource_info.content resource_content,resource.*
+		from `user`,resource_type,resource_info,resource
+		where `user`.id=resource.user_id and resource_type.id=resource.type_id and resource_info.resource_id=resource.id and resource_type.id = #{resourceTypeId}
+	</select>
+
+	<insert id="insertResource" parameterType="Resource" keyProperty="id" useGeneratedKeys="true">
+		insert into <include refid="tableName"/> (user_id,type_id,author,release_time,browse_num,down_num,title,show_flag,create_time,update_time)
+		values(#{userId},#{typeId},#{author},#{releaseTime},#{browseNum},#{downNum},#{title},#{showFlag},#{createTime},#{updateTime})
+	</insert>
+
+</mapper>

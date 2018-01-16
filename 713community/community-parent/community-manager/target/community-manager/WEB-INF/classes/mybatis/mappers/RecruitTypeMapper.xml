@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.RecruitTypeDao">
+
+    <sql id="tableName">recruit_type</sql>
+
+    <!--表字段与实体属性之间的映射规则-->
+    <resultMap id="recruitTypeResultMap" type="recruitType">
+        <id column="id" property="id"/>
+        <result column="name" property="recruitName"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getById" resultMap="recruitTypeResultMap">
+        select * from <include refid="tableName"/>
+        where id= #{id}
+    </select>
+
+    <select id="listAll" resultMap="recruitTypeResultMap">
+        SELECT * from <include refid="tableName"/>
+    </select>
+
+    <select id="listTypeByInformation" parameterType="java.lang.String" resultMap="recruitTypeResultMap">
+        select * from <include refid="tableName"/>
+        where name LIKE #{recruitType}
+    </select>
+
+    <insert id="insert" parameterType="RecruitType">
+        insert into<include refid="tableName"/>
+        (name, remark, create_time, update_time)
+        values(#{recruitName}, #{remark}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="RecruitType">
+        update<include refid="tableName"/>
+        <set>
+            <if test="recruitName != null and recruitName != ''">
+                name = #{recruitName},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from<include refid="tableName"/>
+        where id = #{id}
+    </delete>
+
+
+</mapper>

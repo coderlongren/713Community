@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>资源共享</title>
+		<link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/cssReset.css" />
+		<link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/resShare_list.css" />
+		<link rel="stylesheet" href="http://static.community.com/pages/css/iconfont.css" />
+		<link rel="stylesheet" href="http://static.community.com/pages/css/navAndFooter.css">
+		<link rel="stylesheet" href="http://static.community.com/pages/summernote-master/dist/summernote.css" />
+
+		<!--富文本文件-->
+		<link href="http://static.community.com/froalaEditor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="http://static.community.com/lib/jquery/1.9.1/jquery.min.js"></script>
+		<!--富文本编辑器-->
+		<link href="http://static.community.com/froalaEditor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+		<!--格式化时间js-->
+		<script type="text/javascript" src="http://static.community.com/system/common.js"></script>
+		<!--新增的样式  资源上传按钮-->
+		<style type="text/css">
+			.rowInput {
+				margin: 20px auto;
+				width: 450px;
+			}
+
+			.inputLabel {
+				display: inline-block;
+				width: 120px;
+				text-align: right;
+				margin-right: 20px;
+			}
+
+			.Btn {
+				padding: 6px 12px;
+				width: 80px;
+				font-size: 14px;
+				font-weight: 400;
+				text-align: center;
+				white-space: nowrap;
+				vertical-align: middle;
+				cursor: pointer;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				margin: 2px;
+				background-color: #69b755;
+				color: #fff;
+				margin-bottom: 10px;
+			}
+			.hidden {
+				display: none;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!--导航栏的开始-->
+		<nav  class="navbar navbar-default main navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img style="margin-top: -15px ;height: 50px" class="img-responsive img" alt="713 Community" src="http://static.community.com/pages/img/logo2.png">
+					</a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-collapse menu">
+						<li><a href="index.html">首页 </a></li>
+						<li><a href="#">论坛</a></li>
+						<li><a href="resShare_index.html">资源共享</a></li>
+						<li><a href="R-about1.html">关于我们</a></li>
+						<li><a href="center.html">个人中心</a></li>
+					</ul>
+					<form class="navbar-form navbar-left navbar-collapse">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right menu">
+						<li><a href="register1.html"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+						<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!--导航栏的结束-->
+
+
+		<div class="container-fluid text">
+			<!--子路径以及搜索框的开始-->
+			<div class="sonRoadSearch row">
+				<div class="sonRoad col-md-4">
+					<ol class="breadcrumb">
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-home"></span></a>
+						</li>
+						<li>
+							<a href="http://resource.community.com/resource_index.html">资源共享</a>
+						</li>
+					</ol>
+				</div>
+
+				<div class="searchText col-md-8">
+					<div class="input-group ">
+						<input type="text" class="form-control " value="搜索从这里开始" />
+						<div class="input-group-btn">
+							<button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--子路径以及搜索框的结束-->
+
+			<!--公告栏的开始-->
+			<div class="callBoard row">
+				<div class="callBoard-nav">
+
+				</div>
+				<div class="callBoard-content">
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本板块仅限星星数等级为14颗会员回复,如想快速升级,可通过发布交换资源快速升级,亦可通过客服在线购买升级码快速升级. 如果你有好的资源，可以联系客服，如果资源质量佳并赠予论坛，可以免费升级为金牌会员。 注意:(本版块所有资源均是网上搜集或网友上传提供,本站内容仅供观摩学习交流之用，将不对任何资源负法律责任。 如有侵犯您的版权，请及时发邮件联系我们（admin@itsource.com.cn），或客服QQ:1430004367,我们将尽快处理！)
+					</p>
+				</div>
+
+			</div>
+			<!--公告栏的结束-->
+
+			<!--页面首部的动态数据-->
+			<script>
+                function loadResourcesTopData() {
+                    var id = $("#resourceTypeIdByUrl").val();
+//                    alert(id);
+                    $.ajax({
+                        type : "get",
+                        url : "/resource/list/"+id,
+                        dataType : "json",
+                        statusCode :{
+                            200:function (data) {
+                                //回调函数带回来的值
+                                $(".breadcrumb li").eq(1).after($("<li></li>")
+                                    .text(data.typename));
+								var totalFlagStr = '';
+                            	//判断今日总量相比昨天是否上升
+								if (data.totalFlag == 1) {
+									totalFlagStr = 'iconfont icon-shangsheng';
+								}else {
+								    totalFlagStr = 'iconfont icon-xiajiang';
+								}
+                                $(".callBoard-nav")
+									.append($("<div class='col-md-2'></div>")
+										.append($("<h2></h2>")
+                                            .append($("<a></a>")
+                                                .attr("href","")
+                                                .text("【" + data.typename + "】")
+                                                .append($("<i class='iconfont icon-zhuti1'></i>"))
+											)
+										))
+									.append($("<ul class='list-inline col-md-4'></ul>")
+										.append($("<li>今日：</li>"))
+										.append($("<li></li>")
+											.text(data.total)
+											.append($("<i></i>")
+												.addClass(totalFlagStr)))
+										.append($("<li>主题：</li>"))
+										.append($("<li></li>")
+											.text(data.total)
+											.append($("<i class='iconfont icon-shangsheng'></i>")))
+										.append($("<li>排名：</li>"))
+										.append($("<li></li>")
+											.text(data.rank)
+											.append($("<i class='iconfont icon-shangsheng'></i>")))
+										)
+
+
+                            },
+                            500:function () {
+                                console.log("操作失败，服务器出错！")
+                            },
+                            404:function () {
+                                console.log("资源不存在！")
+                            }
+
+                        }
+                    });
+                }
+			</script>
+
+
+
+			<!--发帖以及分页的开始-->
+			<div class="sendText row">
+				<marquee class="scroll" scrolldelay="5" scrollamount="4" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+					您好！欢迎来到713社区！！
+				</marquee>
+			</div>
+			<!--发帖以及分页的结束-->
+
+			<!--资源表格的开始-->
+			<div class="shareTable">
+				<table class="table table-hover">
+					<thead class="table-thead">
+						<tr>
+							<th class="theme"><i class="iconfont icon-zhuti"></i>版块主题</th>
+							<th class="author"><i class="iconfont icon-zuozhe"></i>作者/发布时间</th>
+							<th class="retandlook">回复/查看</th>
+							<th class="clock"><i class="iconfont icon-shijian"></i>下载量</th>
+						</tr>
+					</thead>
+
+						<!--列表开始 把各条的资源信息加入到tb_body中-->
+					<tbody id="tb-body">
+
+					</tbody>
+
+				</table>
+			</div>
+			<!--论坛表格的结束-->
+
+			<!--资源列表与分页js-->
+			<script>
+				function loadResourceListData() {
+				    var page = 1;
+				    var resourceTypeIdTemp = $("#resourceTypeIdByUrl").val();
+					$.ajax({
+						type : "get",
+						url : "http://resource.community.com/resource/list/"+ resourceTypeIdTemp +"/page/" + page,
+						dataType : "json",
+						statusCode : {
+						    200 : function (data) {
+						        var resource = data.rows;
+						        for (var i = 0; i < resource.length; i++) {
+                                    dynamicAppendResourceList(i,resource);
+								}
+
+                            },
+                            404 : function () {
+								console.log("资源未找到！")
+                            },
+							500 : function () {
+								console.log("服务器出错！")
+                            }
+						}
+					})
+                }
+
+                //动态加载资源列表信息
+				function dynamicAppendResourceList(i,resource) {
+                    $("#tb-body")
+                        .append($("<tr></tr>")
+                            .append($("<td class='tdtheme'></td>")
+                                .append($("<i class='iconfont icon-wenjianjia'></i>"))
+                                .append($("<a></a>")
+                                    .attr("href","http://resource.community.com/resShare_scribe.html?id="+resource[i].id)
+                                    .text(resource[i].title)))
+                            .append($("<td class='tdauthor'></td>")
+                                .append($("<a></a>")
+                                    .attr("href","#")
+                                    .text(resource[i].author))
+                                .append($("<em></em>")
+                                    .append($("<span></span>")
+                                        .text("  "+ new Date(resource[i].releaseTime).Format("yyyy-MM-dd hh:mm:ss")))))
+                            .append($("<td class='tdsum'></td>")
+                                .append($("<a></a>")
+                                    .attr("href","#")
+                                    .text(resource[i].resourceComment))
+                                .append($("<em></em>")
+                                    .text("  /" + resource[i].browseNum)))
+                            .append($("<td class='tdlast'></td>")
+                                .append($("<em></em>")
+                                    .text(resource[i].downNum))))
+                }
+			</script>
+
+
+			<!--发帖以及分页的开始-->
+			<div class="sendText ">
+				<button class="send col-md-1">发帖</button>
+
+				<ul class="pagination col-md-4 col-md-push-7">
+					<li>
+						<a href="#">&laquo;</a>
+					</li>
+					<li>
+						<a href="#">1</a>
+					</li>
+					<li>
+						<a href="#">2</a>
+					</li>
+					<li>
+						<a href="#">3</a>
+					</li>
+					<li>
+						<a href="#">
+							<input type="text" name="" value="" class="page-text" /> /4页
+						</a>
+					</li>
+					<li>
+						<a href="#">&raquo;</a>
+					</li>
+				</ul>
+
+				<!--资源文件(压缩包等)上传开始-->
+				<!--
+					把form表单的自动提交设置为false,否则ajax的post操作就会改变地址栏
+					，就不是局部刷新了
+				-->
+				<div>
+					<form id="uploadForm" enctype="multipart/form-data" onsubmit="return false">
+						<div class="rowInput">
+							<label class="" style="margin-left: 12px">压缩包:</label>
+							<input type="file" size="50" id="file" class="hidden" />
+							<input type="text" id="userWarehouseFile" />
+							<label id="scan" class="Btn" onClick="selectFile()">浏览...</label>
+
+							<div>
+								<label class="">资源标题:</label>
+								<input class="title_resource" type="text"/>
+							</div>
+
+							<div>
+								<label class="" style="margin-left: 115px">资源作者:</label>
+								<input class="author_resource" type="text"/>
+							</div>
+
+
+							<div class="row cl">
+								<label class="" style="margin-left: 115px">资源介绍内容：</label><br/>
+								<div class="formControls col-xs-8 col-sm-9">
+									<section id="editor2">
+										<div id="resource_content" style="margin-top: 10px;" >
+										</div>
+									</section>
+								</div>
+							</div>
+						</div>
+
+						<div class="rowInput">
+							<label class="inputLabel"></label>
+							<button class="Btn sub_btn">资源上传</button>
+							<!--注意：按钮的onclick时间好像不好使，用jquery的绑定事件-->
+						</div>
+					</form>
+				</div>
+				<!--资源文件上传结束-->
+
+				<!--资源上传js-->
+				<script>
+                    function selectFile() {
+                        $("#file").trigger("click");
+                    }
+                    $(".sub_btn").click(function() {
+                        alert("资源上传中，请稍后........")
+                        doZipFilesUpload();
+                    })
+					function doZipFilesUpload() {
+                        /*formData既可以在元form表单追加字段，也可以全部一起追加*/
+//                      var formData = new FormData($('#uploadForm')[0]);
+                        var formData = new FormData();
+                        formData.append('file', $('#file')[0].files[0]);
+						//获取资源的内容信息
+						formData.append("content", $(".froala-element:eq(0)").html());
+						//获取资源的标题
+						formData.append("title", $(".title_resource").val());
+						//获取资源的作者
+						formData.append("author", $(".author_resource").val());
+						//获取资源类别id
+						formData.append("resourceTypeId",$("#resourceTypeIdByUrl").val());
+                        /**
+						 * 	processData设置为false。因为data值是FormData对象，不需要对数据做处理。
+							 <form>标签添加enctype="multipart/form-data"属性。
+							 cache设置为false，上传文件不需要缓存。
+							 contentType设置为false。因为是由<form>表单构造的FormData对象，且已经声明了属性enctype="multipart/form-data"，所以这里设置为false。
+							 上传后，服务器端代码需要使用从查询参数名为file获取文件输入流对象，因为<input>中声明的是name="file"。
+                         */
+                            $.ajax({
+								url: 'http://resource.community.com/resource/list/file',
+								type: 'POST',
+								cache: false,
+								data: formData,
+								processData: false,
+								contentType: false,
+								statusCode : {
+								    201 : function () {
+								        alert("上传成功！");
+								        //刷新当前页面
+                                        window.location.reload();
+//                                        var resource = {
+//                                            "id": 12,
+//                                            "author": "wangxis",
+//                                            "releaseTime": 1515742614815,
+//                                            "browseNum": 1024,
+//                                            "downNum": 1024,
+//                                            "title": "apach",
+//                                            "resourceComment": 0,
+//                                        }
+
+
+                                    },
+									500 : function () {
+								        alert("资源上传失败！")
+										console.log("服务器出错！")
+                                    }
+								}
+                            });
+                    }
+					
+					
+					
+				</script>
+
+			</div>
+			<!--发帖以及分页的结束-->
+
+
+
+
+
+
+			<!--页脚的开始-->
+			<div class="zend">
+				<small>
+		          <ul>
+			          <li><img src="http://static.community.com/pages/img/Link.png" /></li>
+			          <li>友情链接：</li>
+			          <li>版权所有 [2017]</li>
+			          <li>713社区 地址：湖北省武汉市武昌区友谊大道368号 </li>
+			          <li>邮政编码：430062 鄂ICP备05003305 </li> 
+		          </ul>
+		       </small>
+				<br/>
+				<dl class="list-unstyled">
+					<dd><span class="glyphicon glyphicon-envelope"></span>联系我们:
+						<a href="#">*******</a>
+					</dd>
+					<dd>邮箱地址:
+						<a href="#">867253118@qq.com</a>
+					</dd>
+						<dd><span class="glyphicon glyphicon-phone-alt"></span>电话:
+							<a href="#">13016224356</a>
+						</dd>
+				</dl>
+			</div>
+			<!--页脚的结束-->
+			<input type="text" id="resourceTypeIdByUrl" style="display: none"/>
+		</div>
+
+
+		<script type="text/javascript" src="http://static.community.com/lib/layer/2.1/layer.js"></script>
+		<script type="text/javascript" src="http://static.community.com/pages/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/pages/summernote-master/dist/summernote.js"></script>
+		<script type="text/javascript" src="http://static.community.com/pages/summernote-master/dist/lang/summernote-zh-CN.js"></script>
+
+		<!--富文本编辑器js-->
+		<script src="http://static.community.com/froalaEditor/js/froala_editor.min.js"></script>
+		<!--[if lt IE 9]>
+        <!--<script src="../js/froala_editor_ie8.min.js"></script>-->
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/tables.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/lists.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/colors.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/media_manager.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_family.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/font_size.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/block_styles.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/plugins/video.min.js"></script>
+		<script type="text/javascript" src="http://static.community.com/froalaEditor/js/langs/zh_cn.js"></script>
+		<!--富文本编辑器js结束-->
+		<!--/_footer /作为公共模版分离出去-->
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+                $('#resource_content').editable({
+                    inlineMode: false,
+                    theme: 'gray',
+                    //模版
+                    height: '200px', //高度
+					width : '700px',
+                    alwaysBlank: true,
+                    language: "zh_cn",
+                    direction: "ltr",
+                    allowedImageTypes: ["jpeg", "jpg", "png", "gif"],
+                    autosave: true,
+                    autosaveInterval: 2500,
+                    saveURL: 'http://resource.community.com/resource/list/editor/upload',
+                    spellcheck: true,
+                    plainPaste: true,
+                    imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
+                    imageUploadURL: 'http://resource.community.com/resource/list/editor/upload',
+                    enableScript: false
+
+                });
+			    //添加head.html样式会改变
+                //$("#sel").load("http://resource.community.com/head.html");
+                //加载页面上方数据
+                var Request = new Object();
+                Request = GetRequest();
+                var id =Request["id"]; //获取url中id值
+                //alert(id);
+                $("#resourceTypeIdByUrl").val(id);
+                loadResourcesTopData();
+				loadResourceListData();
+
+				//资源上传
+                $("#file").change(function(){
+                    var value = $("#file").val();
+                    //把文件名截取出来
+                    var fileName = getFileName(value);
+                    $("#userWarehouseFile").val(fileName);
+                });
+            });
+
+            //把文件名截取出来
+            function getFileName(o){
+                var pos=o.lastIndexOf("\\");
+                return o.substring(pos+1);
+            }
+            //截取url的id
+            function GetRequest() {
+                var url = location.search; //获取url中"?"符后的字串
+                //alert(url);
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.substr(1);  //截取?到后面的所有字符
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+                    }
+                }
+                return theRequest;
+            }
+		</script>
+
+		<script>
+			$('.send').click(function(){
+				$('html,body').scrollTop(1200)
+			})
+		</script>
+	</body>
+
+</html>

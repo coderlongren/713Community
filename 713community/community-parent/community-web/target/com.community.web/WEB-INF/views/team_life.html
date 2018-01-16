@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title></title>
+        <script type="text/javascript" src="http://static.community.com/pages/js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://static.community.com/pages/css/team_view.css" />
+        <link rel="stylesheet" href="http://static.community.com/pages/css/cssReset.css" />
+        <link rel="stylesheet" href="http://static.community.com/pages/bs/css/bootstrap.css" />
+       
+        
+        
+</head>
+<body style="width: 100%;height: 2000px;">
+<div class="container-fluid">
+<div class="container">
+
+	<!--标题栏的开始-->
+	<div class="photonav">
+		<div style="padding-top: 40px;"></div>
+		<h2>团队生活</h2>
+	</div>
+	<!--标题栏的结束-->
+
+	<!--照片墙的开始-->
+	<div class="content">
+		<div class="iw_wrapper">
+			<ul class="iw_thumbs" id="iw_thumbs">
+				<!--<li><img src="http://static.community.com/pages/img/01.jpg" data-img="http://static.community.com/pages/img/01.jpg" alt="Thumb1" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/02.jpg" data-img="http://static.community.com/pages/img/02.jpg" alt="Thumb2" />-->
+					<!--<div>-->
+						<!--<h2>Silence</h2>-->
+						<!--<p>Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/03.jpg" data-img="http://static.community.com/pages/img/03.jpg" alt="Thumb3" />-->
+					<!--<div>-->
+						<!--<h2>Abstraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/team-1.jpg" data-img="http://static.community.com/pages/img/team-1.jpg" alt="Thumb8" />-->
+					<!--<div>-->
+						<!--<h2>Happiness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/09.jpg" data-img="http://static.community.com/pages/img/09.jpg" alt="Thumb9" />-->
+					<!--<div>-->
+						<!--<h2>Greatness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/10.jpg" data-img="http://static.community.com/pages/img/10.jpg" alt="Thumb10" />-->
+					<!--<div>-->
+						<!--<h2>Abstraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/06.jpg" data-img="http://static.community.com/pages/img/06.jpg" alt="Thumb6" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/07.jpg" data-img="http://static.community.com/pages/img/07.jpg" alt="Thumb7" />-->
+					<!--<div>-->
+						<!--<h2>Beauty</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/08.jpg" data-img="http://static.community.com/pages/img/08.jpg" alt="Thumb8" />-->
+					<!--<div>-->
+						<!--<h2>Happiness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/12.jpg" data-img="http://static.community.com/pages/img/12.jpg" alt="Thumb12" />-->
+					<!--<div>-->
+						<!--<h2>Greatness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/04.jpg" data-img="http://static.community.com/pages/img/04.jpg" alt="Thumb4" />-->
+					<!--<div>-->
+						<!--<h2>Attraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/05.jpg" data-img="http://static.community.com/pages/img/05.jpg" alt="Thumb5" />-->
+					<!--<div>-->
+						<!--<h2>Growth</h2>-->
+						<!--<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/06.jpg" data-img="http://static.community.com/pages/img/06.jpg" alt="Thumb6" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/team-2.jpg" data-img="http://static.community.com/pages/img/team-2.jpg" alt="Thumb7" />-->
+					<!--<div>-->
+						<!--<h2>Beauty</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/team-3.jpg" data-img="http://static.community.com/pages/img/team-3.jpg" alt="Thumb10" />-->
+					<!--<div>-->
+						<!--<h2>Abstraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/11.jpg" data-img="http://static.community.com/pages/img/11.jpg" alt="Thumb11" />-->
+					<!--<div>-->
+						<!--<h2>Attraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/team-4.jpg" data-img="http://static.community.com/pages/img/team-4.jpg" alt="Thumb3" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/13.jpg" data-img="http://static.community.com/pages/img/13.jpg" alt="Thumb13" />-->
+					<!--<div>-->
+						<!--<h2>Happiness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/14.jpg" data-img="http://static.community.com/pages/img/14.jpg" alt="Thumb14" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/shuji-1.jpg" data-img="http://static.community.com/pages/img/shuji-1.jpg" alt="Thumb1" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/4.jpg" data-img="http://static.community.com/pages/img/4.jpg" alt="Thumb2" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/11.jpg" data-img="http://static.community.com/pages/img/11.jpg" alt="Thumb11" />-->
+					<!--<div>-->
+						<!--<h2>Attraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/12.jpg" data-img="http://static.community.com/pages/img/12.jpg" alt="Thumb12" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/shuji-2.jpg" data-img="http://static.community.com/pages/img/shuji-2.jpg" alt="Thumb13" />-->
+					<!--<div>-->
+						<!--<h2>Happiness</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/14.jpg" data-img="http://static.community.com/pages/img/14.jpg" alt="Thumb14" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/02.jpg" data-img="http://static.community.com/pages/img/02.jpg" alt="Thumb1" />-->
+					<!--<div>-->
+						<!--<h2>Virtue</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/04.jpg" data-img="http://static.community.com/pages/img/04.jpg" alt="Thumb2" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/06.jpg" data-img="http://static.community.com/pages/img/06.jpg" alt="Thumb3" />-->
+					<!--<div>-->
+						<!--<h2>Attraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/08.jpg" data-img="http://static.community.com/pages/img/08.jpg" alt="Thumb4" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/12.jpg" data-img="http://static.community.com/pages/img/12.jpg" alt="Thumb1" />-->
+					<!--<div>-->
+						<!--<h2>Serenity</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/02.jpg" data-img="http://static.community.com/pages/img/02.jpg" alt="Thumb2" />-->
+					<!--<div>-->
+						<!--<h2>Silence</h2>-->
+						<!--<p>Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+				<!--<li><img src="http://static.community.com/pages/img/03.jpg" data-img="http://static.community.com/pages/img/03.jpg" alt="Thumb3" />-->
+					<!--<div>-->
+						<!--<h2>Abstraction</h2>-->
+						<!--<p>Far far away, behind the word mountains there live the blind texts.</p>-->
+					<!--</div>-->
+				<!--</li>-->
+
+			</ul>
+		</div>
+		<div id="iw_ribbon" class="iw_ribbon"> <span class="iw_close"></span> <span class="iw_zoom">Click thumb to zoom</span> </div>
+	</div>
+	<!--照片墙的结束-->
+
+	<!--标题栏的开始-->
+	<div class="photonav">
+		<h2>大事记</h2>
+	</div>
+	<!--标题栏的结束-->
+
+	<!--团队历史的开始-->
+	<div>
+
+		<div class="event_box">
+			<div class="space_div">
+				<p class="left_space"></p>
+				<p class="right_space"></p>
+			</div>
+			<div class="parHd clearfix">
+				<ul>
+					<li>713官网项目的开启</li>
+					<li>每天的小事</li>
+					<li>学长有话说</li>
+					<li>项目经理讲解需求</li>
+					<li>招新预热</li>
+					<li>招新面试</li>
+				</ul>
+				<a class="sPrev"><img src="http://static.community.com/pages/img/timeleft.png" alt="" title=""></a>
+				<a class="sNext"><img src="http://static.community.com/pages/img/timeright.png" alt="" title=""></a>
+			</div>
+			<div class="parBd">
+				<div class="slideBox">
+					<img src="http://static.community.com/pages/img/7132.png" class="img02 img-responsive"/>
+					<img src="http://static.community.com/pages/img/7133.png" class="img03 img-responsive"/>
+					<img src="http://static.community.com/pages/img/7131.png" class="img01 img-responsive"/>
+					<h2 class="hcontent">号外(ΩДΩ)！！！713的官网开始筹备啦！！！</h2>
+				</div>
+				<div class="slideBox " style="display: none;">
+					<div class="content2bg"></div>
+					<div class="content2">
+					     <p class="text-left">“有时成功就是，用心将一件事每天都做好一点点。”</p>
+					     <p class="text-left">713的孩子(*￣︶￣)</p>
+					     <p class="text-left">每天都为自己为实验室</p>
+					     <p class="text-left">努力一点点</p>
+					     <p class="text-left">进步一点点</p>
+					</div>
+				</div>
+				<div class="slideBox row" style="display: none;">
+					<div class="weleft col-md-6">
+						<p class="text-left">学长说：</p>
+						<p class="text-left">你们一定要积极一点，不要违背进实验室的初衷。</p>
+						<p class="text-right">学长说：</p>
+						<p class="text-right">进实验室是个双赢的事，不仅为实验室，更多是为自己</p>
+						<p class="text-left">学长说：</p>
+						<p class="text-left">实验室的每个人都各自有自己的事，要想为人先，必须靠自己</p>
+					</div>
+					<div class="weleft col-md-6">
+						<p class="text-right">学长还说：</p>
+						<p class="text-right">大家要共享，资料啥的你们都可以借着看，共同进步！</p>
+						<p class="text-left">老师说：</p>
+						<p class="text-left">没事在实验室待一会儿，学点东西也是好的！</p>
+						<p class="text-right">老师说：</p>
+						<p class="text-right">今天大家都在，看到了年轻的力量！</p>
+						
+					</div>
+				</div>
+				<div class="slideBox" style="display: none;">
+					<div class="pic ">
+						<img src="http://static.community.com/pages/img/xm1.jpg"  class="thumbnail img-responsive col-md-4"/>
+						<img src="http://static.community.com/pages/img/xm2.jpg" class="thumbnail img-responsive col-md-4"/>
+						<p>项目进行中，━((*′д｀)爻(′д｀*))━!!!!)大家聚精会神！！</p>
+					</div>
+				</div>
+				<div class="slideBox" style="display: none;">
+					<div class="yre">
+					<p>对！！！</p>
+					<p>就是此刻\(^o^)/~</p>
+					<p>这个版块是为16级的你们准备的啦♪(^∇^*)</p>
+					<p>(*^▽^*)快来和我一起了解下实验室吧！！！</p>
+					</div>
+				</div>
+				<div class="slideBox" style="display: none;">
+					<div class="joinus">
+						
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<!--团队历史的结束-->
+
+	<!--标题栏的开始-->
+	<div class="photonav">
+		<h2>风采展示</h2>
+	</div>
+	<!--标题栏的结束-->
+
+	<div class="xyzs clearfix">
+		<div class="xyzsLeft">
+			<!--<div class="photo325190"></div>-->
+			<!--<div class="photo325307"></div>-->
+		</div>
+		<div class="xyzsMid">
+			<!--<div class="photo629190 clearfix">-->
+				<!--<div class="photo419190"></div>-->
+				<!--<div class="photo210190"></div>-->
+			<!--</div>-->
+			<!--<div class="photo629307">-->
+				<!--<div class="photo210307">-->
+					<!--<div class="photo2101531"></div>-->
+					<!--<div class="photo2101532"></div>-->
+				<!--</div>-->
+				<!--<div class="photo419307"></div>-->
+			<!--</div>-->
+		</div>
+		<div class="xyzsRight">
+			<!--<div class="photo344307"></div>-->
+			<!--<div class="photo344190"></div>-->
+		</div>
+	</div>
+</div>
+	<!--页脚的开始-->
+	<div class="zend">
+		<small>
+		          <ul>
+			          <li><img src="http://static.community.com/pages/img/Link.png" /></li>
+			          <li>友情链接：</li>
+			          <li>版权所有 [2017]</li>
+			          <li>713社区 地址：湖北省武汉市武昌区友谊大道368号 </li>
+			          <li>邮政编码：430062 鄂ICP备05003305 </li> 
+		          </ul>
+		       </small>
+		<br/>
+		<dl class="list-unstyled">
+			<dd><span class="glyphicon glyphicon-envelope"></span>联系我们:
+				<a href="#">*******</a>
+			</dd>
+			<dd>邮箱地址:
+				<a href="#">867253118@qq.com</a>
+				</dd>
+				<dd><span class="glyphicon glyphicon-phone-alt"></span>电话:
+					<a href="#">13016224356</a>
+				</dd>
+		</dl>
+	</div>
+	<!--页脚的结束-->
+</div>
+
+<script type="text/javascript" src="http://static.community.com/pages/bs/js/bootstrap.min.js" ></script>
+<!--<script type="text/javascript" src="http://static.community.com/pages/js/resShare_scribe.js"></script>-->
+<script type="text/javascript" src="http://static.community.com/pages/js/index.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="http://static.community.com/pages/js/jquery.SuperSlide2.1.2.js"></script>
+
+<script type="text/javascript">$(window).load(function() {
+	var $iw_thumbs = $('#iw_thumbs'),
+		$iw_ribbon = $('#iw_ribbon'),
+		$iw_ribbon_close = $iw_ribbon.children('span.iw_close'),
+		$iw_ribbon_zoom = $iw_ribbon.children('span.iw_zoom');
+
+	ImageWall = (function() {
+		// window width and height
+		var w_dim,
+			// index of current image
+			current = -1,
+			isRibbonShown = false,
+			isFullMode = false,
+			// ribbon / images animation settings
+			ribbonAnim = {
+				speed: 500,
+				easing: 'easeOutExpo'
+			},
+			imgAnim = {
+				speed: 400,
+				easing: 'jswing'
+			},
+			// init function : call masonry, calculate window dimentions, initialize some events
+			init = function() {
+				$iw_thumbs.imagesLoaded(function() {
+					$iw_thumbs.masonry({
+						isAnimated: true
+					});
+				});
+				getWindowsDim();
+				initEventsHandler();
+			},
+			// calculate window dimentions
+			getWindowsDim = function() {
+				w_dim = {
+					width: $(window).width(),
+					height: $(window).height()
+				};
+			},
+			// initialize some events
+			initEventsHandler = function() {
+
+				// click on a image
+				$iw_thumbs.delegate('li', 'click', function() {
+					if($iw_ribbon.is(':animated')) return false;
+
+					var $el = $(this);
+
+					if($el.data('ribbon')) {
+						showFullImage($el);
+					} else if(!isRibbonShown) {
+						isRibbonShown = true;
+
+						$el.data('ribbon', true);
+
+						// set the current
+						current = $el.index();
+
+						showRibbon($el);
+					}
+				});
+
+				// click ribbon close
+				$iw_ribbon_close.bind('click', closeRibbon);
+
+				// on window resize we need to recalculate the window dimentions
+				$(window).bind('resize', function() {
+						getWindowsDim();
+						if($iw_ribbon.is(':animated'))
+							return false;
+						closeRibbon();
+					})
+					.bind('scroll', function() {
+						if($iw_ribbon.is(':animated'))
+							return false;
+						closeRibbon();
+					});
+
+			},
+			showRibbon = function($el) {
+				var $img = $el.children('img'),
+					$descrp = $img.next();
+
+				// fadeOut all the other images
+				$iw_thumbs.children('li').not($el).animate({
+					opacity: 0.2
+				}, imgAnim.speed);
+
+				// increase the image z-index, and set the height to 100px (default height)
+				$img.css('z-index', 100)
+					.data('originalHeight', $img.height())
+					.stop()
+					.animate({
+						height: '100px'
+					}, imgAnim.speed, imgAnim.easing);
+
+				// the ribbon will animate from the left or right
+				// depending on the position of the image
+				var ribbonCssParam = {
+						top: $el.offset().top - $(window).scrollTop() - 6 + 'px'
+					},
+					descriptionCssParam,
+					dir;
+
+				if($el.offset().left < (w_dim.width / 2)) {
+					dir = 'left';
+					ribbonCssParam.left = 0;
+					ribbonCssParam.right = 'auto';
+				} else {
+					dir = 'right';
+					ribbonCssParam.right = 0;
+					ribbonCssParam.left = 'auto';
+				}
+
+				$iw_ribbon.css(ribbonCssParam)
+					.show()
+					.stop()
+					.animate({
+						width: '100%'
+					}, ribbonAnim.speed, ribbonAnim.easing, function() {
+						switch(dir) {
+							case 'left':
+								descriptionCssParam = {
+									'left': $img.outerWidth(true) + 'px',
+									'text-align': 'left'
+								};
+								break;
+							case 'right':
+								descriptionCssParam = {
+									'left': '-200px',
+									'text-align': 'right'
+								};
+								break;
+						};
+						$descrp.css(descriptionCssParam).fadeIn();
+						// show close button and zoom
+						$iw_ribbon_close.show();
+						$iw_ribbon_zoom.show();
+					});
+
+			},
+			// close the ribbon
+			// when in full mode slides in the middle of the page
+			// when not slides left
+			closeRibbon = function() {
+				isRibbonShown = false
+
+				$iw_ribbon_close.hide();
+				$iw_ribbon_zoom.hide();
+
+				if(!isFullMode) {
+
+					// current wall image
+					var $el = $iw_thumbs.children('li').eq(current);
+
+					resetWall($el);
+
+					// slide out ribbon
+					$iw_ribbon.stop()
+						.animate({
+							width: '0%'
+						}, ribbonAnim.speed, ribbonAnim.easing);
+
+				} else {
+					$iw_ribbon.stop().animate({
+						opacity: 0.8,
+						height: '0px',
+						marginTop: w_dim.height / 2 + 'px' // half of window height
+					}, ribbonAnim.speed, function() {
+						$iw_ribbon.css({
+							'width': '0%',
+							'height': '126px',
+							'margin-top': '0px'
+						}).children('img').remove();
+					});
+
+					isFullMode = false;
+				}
+			},
+			resetWall = function($el) {
+				var $img = $el.children('img'),
+					$descrp = $img.next();
+
+				$el.data('ribbon', false);
+
+				// reset the image z-index and height
+				$img.css('z-index', 1).stop().animate({
+					height: $img.data('originalHeight')
+				}, imgAnim.speed, imgAnim.easing);
+
+				// fadeOut the description
+				$descrp.fadeOut();
+
+				// fadeIn all the other images
+				$iw_thumbs.children('li').not($el).animate({
+					opacity: 1
+				}, imgAnim.speed);
+			},
+			showFullImage = function($el) {
+				isFullMode = true;
+
+				$iw_ribbon_close.hide();
+
+				var $img = $el.children('img'),
+					large = $img.data('img'),
+
+					// add a loading image on top of the image
+					$loading = $('<span class="iw_loading"></span>');
+
+				$el.append($loading);
+
+				// preload large image
+				$('<img/>').load(function() {
+					var $largeImage = $(this);
+
+					$loading.remove();
+
+					$iw_ribbon_zoom.hide();
+
+					resizeImage($largeImage);
+
+					// reset the current image in the wall
+					resetWall($el);
+
+					// animate ribbon in and out
+					$iw_ribbon.stop().animate({
+						opacity: 1,
+						height: '0px',
+						marginTop: '63px' // half of ribbons height
+					}, ribbonAnim.speed, function() {
+						// add the large image to the DOM
+						$iw_ribbon.prepend($largeImage);
+
+						$iw_ribbon_close.show();
+
+						$iw_ribbon.animate({
+							height: '100%',
+							marginTop: '0px',
+							top: '0px'
+						}, ribbonAnim.speed);
+					});
+				}).attr('src', large);
+
+			},
+			resizeImage = function($image) {
+				var widthMargin = 100,
+					heightMargin = 100,
+
+					windowH = w_dim.height - heightMargin,
+					windowW = w_dim.width - widthMargin,
+					theImage = new Image();
+
+				theImage.src = $image.attr("src");
+
+				var imgwidth = theImage.width,
+					imgheight = theImage.height;
+
+				if((imgwidth > windowW) || (imgheight > windowH)) {
+					if(imgwidth > imgheight) {
+						var newwidth = windowW,
+							ratio = imgwidth / windowW,
+							newheight = imgheight / ratio;
+
+						theImage.height = newheight;
+						theImage.width = newwidth;
+
+						if(newheight > windowH) {
+							var newnewheight = windowH,
+								newratio = newheight / windowH,
+								newnewwidth = newwidth / newratio;
+
+							theImage.width = newnewwidth;
+							theImage.height = newnewheight;
+						}
+					} else {
+						var newheight = windowH,
+							ratio = imgheight / windowH,
+							newwidth = imgwidth / ratio;
+
+						theImage.height = newheight;
+						theImage.width = newwidth;
+
+						if(newwidth > windowW) {
+							var newnewwidth = windowW,
+								newratio = newwidth / windowW,
+								newnewheight = newheight / newratio;
+
+							theImage.height = newnewheight;
+							theImage.width = newnewwidth;
+						}
+					}
+				}
+
+				$image.css({
+					'width': theImage.width+ 'px',
+					'height': theImage.height + 'px',
+					'margin-left': -theImage.width / 2 + 'px',
+					'margin-top': -theImage.height / 2 + 'px'});
+};
+
+return {
+	init: init
+};
+})();
+
+ImageWall.init();
+});
+
+$(function() {
+	$(".event_box").slide({
+		titCell: ".parHd li",
+		mainCell: ".parBd",
+		defaultPlay: false,
+		titOnClassName: "act",
+		prevCell: ".sPrev",
+		nextCell: ".sNext"
+	});
+	$(".parHd").slide({
+		mainCell: " ul",
+		vis: 6,
+		effect: "leftLoop",
+		defaultPlay: false,
+		prevCell: ".sPrev",
+		nextCell: ".sNext"
+	})
+
+	LoadTeamLifeTopData("http://www.community.com/rest/team/life");
+	
+});
+
+function LoadTeamLifeTopData(url) {
+	$.ajax({
+		type:"get",
+		url:url,
+		dataType:"json",
+		statusCode:{
+		    200: function (data) {
+		        /*
+				 <li><img src="http://static.community.com/pages/img/03.jpg" data-img="http://static.community.com/pages/img/03.jpg" alt="Thumb3" />
+				 <div>
+				 <h2>Abstraction</h2>
+				 <p>Far far away, behind the word mountains there live the blind texts.</p>
+				 </div>
+				 </li>
+		        */
+		        for(var i=0;i<data.teamLifeTopImgs.length;i++){
+					$("<li></li>").append($("<img/>").attr("src",data.teamLifeTopImgs[i].url)
+						.attr("data-img",data.teamLifeTopImgs[i].url).attr("alt", "Thumb" + i)
+						.append($("<div></div>")
+                            .append($("<h2></h2>").text(data.teamLifeTopImgs[i].title))
+                            .append($("<p></p>").text(data.teamLifeTopImgs[i].info))
+						))
+						.appendTo($("#iw_thumbs"));
+				}
+				for(var i=0;i<data.teamLifeButtonImgs.length;i++){
+					var url=data.teamLifeButtonImgs[i].url;
+					//alert(url);
+					if(i==0){
+                        $(".xyzsLeft").append($("<div class='photo325190'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==1){
+					    $(".xyzsLeft").append($("<div class='photo325307'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==2){
+					    $(".xyzsMid").append($("<div class='photo629190 clearfix'></div>").append($("<div class='photo419190'></div>")
+                            .css({
+                                "background":"url("+url+")"
+							})));
+					}
+					if(i==3){
+					    $(".photo629190").append($("<div class='photo210190'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==4){
+					    $(".xyzsMid").append($("<div class='photo629307'>").append($("<div class='photo210307'></div>")
+							.append($("<div class='photo2101531'></div>").css({
+								"background":"url("+url+")"
+							}))));
+					}
+					if(i==5){
+					    $(".photo210307").append($("<div class='photo2101532'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==6){
+					    $(".photo629307").append($("<div class='photo419307'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==7){
+					    $(".xyzsRight").append($("<div class='photo344307'></div>").css({
+							"background":"url("+url+")"
+						}));
+					}
+					if(i==8){
+                        $(".xyzsRight").append($("<div class='photo344190'></div>").css({
+                            "background":"url("+url+")"
+                        }));
+					}
+				}
+            },
+			404: function () {
+				
+            },
+			500:function () {
+				
+            }
+		}
+		
+	});
+}
+
+</script>
+</body>
+</html>

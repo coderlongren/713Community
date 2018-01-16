@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="community-personal:war">
+    <output-path>$PROJECT_DIR$/community-parent/community-personal/target</output-path>
+    <root id="archive" name="community-personal.war">
+      <element id="artifact" artifact-name="community-personal:war exploded" />
+    </root>
+  </artifact>
+</component>

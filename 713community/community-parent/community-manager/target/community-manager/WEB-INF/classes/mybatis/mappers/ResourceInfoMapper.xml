@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
+-->
+
+<mapper namespace="com.community.manager.dao.ResourceInfoDao">
+
+	<!--sql片段-->
+	<sql id="tableName">resource_info</sql>
+
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+	 		1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 		2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+	 -->
+	<!-- resultMap:id自定义，type为需要映射的实体JavaBean
+         1、必须要有<id/>标签，其中column为数据库表对应的字段名，property对应为实体类的属性名
+         2、<result/>根据每个表的字段数量来定义，其中column为数据库表对应的字段名，property对应为实体类的属性名
+ -->
+	<resultMap id="resourceInfoResultMap" type="ResourceInfo">
+		<id column="id" property="id"/>
+		<result column="resource_id" property="resourceId"/>
+		<result column="content" property="content"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+
+	<!-- SQL的DML操作分别对应select、update、delete、insert 这几个标签，当使用这些标签时注意：
+			1、id的值为对应dao类里的那个方法的方法名，如SysUserao里的List<SysUser> listAll()-则该select标签的id应为listAll
+			2、统一给每一个mapper.xml定义resultMap映射，然后每一个查询的查询结果统一使用resultMap
+			3、如果对应的查询方法有参数值，则要设置parameterType，其值为方法里对应参数的类型
+	 -->
+	<!--根据id删除资源详情记录-->
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from <include refid="tableName"/> where resource_id = #{id}
+	</delete>
+	<!--插入记录-->
+	<insert id="insert" parameterType="com.community.manager.entity.ResourceInfo">
+		insert into <include refid="tableName"/> (resource_id,content,create_time,update_time)
+		  values(#{resourceId},#{content},#{createTime},#{updateTime})
+	</insert>
+
+	<!--根据资源id查询资源内容-->
+	<select id="getById" parameterType="java.lang.Long" resultMap="resourceInfoResultMap">
+		select * from <include refid="tableName"/>
+		where resource_id=#{id}
+	</select>
+
+</mapper>

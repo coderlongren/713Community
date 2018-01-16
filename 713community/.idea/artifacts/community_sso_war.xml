@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="community-sso:war">
+    <output-path>$PROJECT_DIR$/community-parent/community-sso/target</output-path>
+    <root id="archive" name="community-sso.war">
+      <element id="artifact" artifact-name="community-sso:war exploded" />
+    </root>
+  </artifact>
+</component>
